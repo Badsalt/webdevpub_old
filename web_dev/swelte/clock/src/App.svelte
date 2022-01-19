@@ -260,7 +260,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 <main>
 	<h1>Clock Viewer</h1>
 	{#if clock.isTriggered}
-			<div style="height: 200px;">	
+			<div in:fly={{y: -50, duration: 2000}} out:fly={{y: -50, duration: 2000}}  style="height: 200px; background-color: white;">	
 				<div class="alarmWakeUp">
 					<h2 class="alarmclock">Wake up!!</h2>
 				</div>
