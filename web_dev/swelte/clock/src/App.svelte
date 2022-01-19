@@ -270,7 +270,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 						{/if}
 
 						{#if clock._alarmIsActive}
-							<p in:fade>Alarm set to: <b>{alarm}</b></p>
+							<p in:fade>Alarm set to: <b>{clock.alarm}</b></p>
 						{:else if (alarmNotDefined)}
 							<p in:fade>Set alarm to valid time</p>
 						{/if}
@@ -323,7 +323,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 					{/if}
 
 				{#if clock._alarmIsActive}
-					<p in:fade>Alarm set to: <b>{alarm}</b></p>
+					<p in:fade>Alarm set to: <b>{clock.alarm}</b></p>
 					{:else if (alarmNotDefined)}
 						<p in:fade>Set alarm to valid time</p>
 				{/if}
@@ -364,7 +364,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 			{/if}
 
 			{#if clock._alarmIsActive}
-				<p in:fade>Alarm set to: <b>{alarm}</b></p>
+				<p in:fade>Alarm set to: <b>{clock.alarm}</b></p>
 			{:else if (alarmNotDefined)}
 				<p in:fade>Set alarm to valid time</p>
 			{/if}
