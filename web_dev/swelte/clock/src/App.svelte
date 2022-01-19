@@ -32,10 +32,6 @@
 		}
 	}
 
-
-
-
-
 </script>
 
 <style>
@@ -44,8 +40,7 @@
 		background-color: rgb(215,255,0);
 background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(151, 177, 33) 25%, rgba(87,255,0,1) 45%, rgb(255, 136, 38) 71%, rgb(50,234,62) 90%);
 		animation: gradient 30s ease infinite;
-		font-family: 'Roboto Mono', monospace;
-		
+		font-family: 'Roboto Mono', monospace;		
 	}
 	@keyframes gradient {
 	0% {
@@ -175,23 +170,26 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 		text-align: center;
 	}
 
-	button.setAlarm:hover, input:hover {
+	button.setAlarm:hover, 
+	input:hover {
 		animation: buttonChangeBackground 0.25s 1;
 		background-color: rgb(129, 129, 130);
 		color: white;
 	}
 
-	button.setAlarm:active, input:active {
+	button.setAlarm:active, 
+	input:active {
 		color: white;
 		background-color: rgb(129, 129, 130);
 	}
 
-	button.disableAlarm{
+	button.disableAlarm {
 		color: white; 
 		background: rgba(255, 0, 0, 0.75);
 	}
 
-	button.disableAlarm:hover, button.disableAlarm:active {
+	button.disableAlarm:hover, 
+	button.disableAlarm:active {
 		background-color: red;
 	}
 
@@ -199,7 +197,6 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 		from {background-color: rgb(162, 205, 220)}
   		to {background-color: rgb(129, 129, 130)}
 	}
-
 
 	.tttt{
 		font-weight: bolder;
@@ -245,7 +242,8 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 		p {
 			font-size: 15px;
 		}
-		input, button {
+		input, 
+		button {
 			padding: 10px 7.5px;
 		}
 		
@@ -253,7 +251,6 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 			font-size: 1em;
 		}
 	}
-
 
 </style>
 
@@ -265,7 +262,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 					<h2 class="alarmclock">Wake up!!</h2>
 				</div>
 			</div>
-		{/if}
+	{/if}
 	<div class="container">
 		<div class="clock">
 					<div style="position: relative; height:200px;">
@@ -358,7 +355,6 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 				</div>
 				<div class="minuteMeter" style="width: 50%; height: 100%">
 					<svg width="80" height="200" style="width: 80%; border: 3px solid green;">
-						  
 						<rect x= "0" y= "{198 - clock.time.minute*3.33}" width="100%" height="200" style="fill:rgb(0,0,255);stroke:rgb(0,0,0);" />
 						<text class="tttt" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">{clock.time.minute.toString().padStart(2, "0")}</text>	
 				</div>					
@@ -379,5 +375,4 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 			</div>
 		</div>
 	</div>
-
 </main>
