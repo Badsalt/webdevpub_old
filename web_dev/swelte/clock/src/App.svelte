@@ -1,4 +1,8 @@
-<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,300&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<!--<link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'> -->
 <script>
 	import { Clock } from "./clock.js";
 	import {fly, fade } from "svelte/transition";
@@ -38,8 +42,10 @@
 	:global(body){
 		background-size: 400% 400% !important;
 		background-color: rgb(215,255,0);
-background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(177,33,33,1) 25%, rgba(87,255,0,1) 45%, rgba(38,47,255,1) 71%, rgba(50,234,62,1) 90%);
-		animation: gradient 15s ease infinite;
+background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(151, 177, 33) 25%, rgba(87,255,0,1) 45%, rgb(255, 136, 38) 71%, rgb(50,234,62) 90%);
+		animation: gradient 30s ease infinite;
+		font-family: 'Roboto Mono', monospace;
+		
 	}
 	@keyframes gradient {
 	0% {
@@ -70,11 +76,10 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
     }
         .clock{
             width: 30%;
-			min-width: 200px; 
+			min-width: 200px;
             background-color: rgb(47,79,79);
             border: black solid 5px;
             margin: 5px;
-			height: 300px;
 			border-radius: 50px;
 			padding: 10px 0 10px 0;
 			color: whitesmoke;
@@ -96,12 +101,14 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
   			to {background-color: rgb(0, 0, 0)}
 		}
 
-
+		b {
+			color: rgb(243, 83, 91);
+		}
 
 		.time{
 			font-size: 3em;
 			margin: 25px 0;
-			font-family: 'Orbitron', 'sans-serif';
+			font-family: 'IBM Plex Mono','Orbitron', 'sans-serif';
 			font-style: italic;
 			font-weight: bold;
 			letter-spacing: 0.1em;
@@ -147,35 +154,20 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 	
 	@media (max-width: 1000px) {
 		.container {
-			flex-direction: column;
-			
+			flex-direction: column;	
 		}
 
-		.clock{
+		.clock {
 			width: 70%;
 			margin: 5px auto;
 		}
 	}
 
-	.alarmclock{
+	.alarmclock {
 		margin: 0;
 	}
 
-	@media (max-width: 500px) {
-		.container {
-			flex-direction: column;
-			
-		}
-
-		.clock{
-			width: 100%;
-			margin: 5px auto;
-		}
-	}
-	
-	button, input
-
-	{
+	button, input {
 		background-color: rgb(162, 205, 220);
 		cursor: pointer;
 		border-radius: 5px;
@@ -195,7 +187,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 	}
 
 	button.disableAlarm{
-		color: black; 
+		color: white; 
 		background: rgba(255, 0, 0, 0.75);
 	}
 
@@ -203,8 +195,6 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 		background-color: red;
 	}
 
-
-	
 	@keyframes buttonChangeBackground{
 		from {background-color: rgb(162, 205, 220)}
   		to {background-color: rgb(129, 129, 130)}
@@ -218,44 +208,72 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 	}
 
 	.alarmWakeUp{
-		height: 200px;
+		height: 80px;
 		position: relative;
+		font-size: 2.5em;
 		color: rgb(170, 19, 19);
-		animation: moveAround 1s infinite;
+		display: inline-block;
+		animation: moveAround 1s ease infinite;
 	}
 
 	@keyframes moveAround{
 		0% {
-			margin-top: 10px;
+			margin-top: 5px;
 		}
 
 		50% {
-			margin-top: 20px;
+			margin-top: 100px;
 		}
 
 		100% {
-			margin-top: 10px;
+			margin-top: 5px;
 			color:rgb(255, 0, 0);
 		}
 	}
 
+	@media (max-width: 500px) {
+		.clock{
+			width: 100%;
+			margin: 5px auto;
+		}
+
+		.alarmWakeUp{
+			font-size: 2em;
+		}
+	}
+	@media (max-width: 300px) {
+		p {
+			font-size: 15px;
+		}
+		input, button {
+			padding: 10px 7.5px;
+		}
+		
+		.alarmWakeUp{
+			font-size: 1em;
+		}
+	}
+
+
 </style>
 
 <main>
-	<h1>Clock</h1>
+	<h1>Clock Viewer</h1>
+	{#if clock.isTriggered}
+			<div style="height: 200px;">	
+				<div class="alarmWakeUp">
+					<h2 class="alarmclock">Wake up!!</h2>
+				</div>
+			</div>
+		{/if}
 	<div class="container">
 		<div class="clock">
-					<div style="position: relative; height: 200px">
-						{#if clock.isTriggered}
-							<div class="alarmWakeUp" style="display: inline-block;">
-								<h2 class="alarmclock">Wake up!!</h2>
-							</div>			
-						{/if}
+					<div style="position: relative; height:200px;">
 						<div id="digitalClock">
 							{#key clock.time.hour}
 								<span style="position: absolute; margin:0; top: 0px; left: 0;" in:fly="{{ y: -25}}" class= "time">{clock.time.hour.toString().padStart(2, "0")}</span>
 							{/key}	
-								<span style="font-size: 3em; position: absolute; margin: 0; top: -9px; botton: 5px; left: 95px; display: inline-block; height: 5px">:</span>
+								<span style="font-size: 3em; position: absolute; margin: 0; top: -6px; left: 80px; display: inline-block; height: 5px">:</span>
 							{#key clock.time.minute}
 								<span style="position: absolute; margin: 0; top: 0; right: 5px; " in:fly="{{ y: -25}}" class= "time">{clock.time.minute.toString().padStart(2, "0")}</span>
 							{/key}
@@ -269,14 +287,14 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 							<button class="setAlarm" on:click={activateAlarm}>Set Alarm</button>
 						{/if}
 
-						{#if clock._alarmIsActive}
+						{#if clock._alarmIsActive && !clock.isTriggered}
 							<p in:fade>Alarm set to: <b>{clock.alarm}</b></p>
-						{:else if (alarmNotDefined)}
-							<p in:fade>Set alarm to valid time</p>
+						{:else if (alarmNotDefined && !clock.isTriggered)}
+							<p in:fade>Set alarm to a valid time</p>
 						{/if}
 					</div>
 		</div>	
-		<div class="clock">	
+		<div class="clock">
 			<!-- Inspired by: https://svelte.dev/examples#clock -->
 				<div class="item" style="height: 200px;">
 					<svg viewBox='-50 -50 100 100' style="width: 70%; height:100%">
@@ -314,7 +332,8 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 							transform='rotate({6 * $minuteClock})'
 						/>
 					</svg>
-				<div>
+					</div>
+				<div style="margin-top: 5px;">
 					<input bind:value={alarm} type="time">
 					{#if clock._alarmIsActive}
 						<button class="disableAlarm" on:click={()=>{ clock.deactivateAlarm(); alarm = ""; }}>Disable</button>
@@ -322,22 +341,18 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 						<button class="setAlarm" on:click={activateAlarm}>Set Alarm</button>
 					{/if}
 
-				{#if clock._alarmIsActive}
+				{#if clock._alarmIsActive && !clock.isTriggered}
 					<p in:fade>Alarm set to: <b>{clock.alarm}</b></p>
-					{:else if (alarmNotDefined)}
-						<p in:fade>Set alarm to valid time</p>
+					{:else if (alarmNotDefined && !clock.isTriggered)}
+						<p in:fade>Set alarm to a valid time</p>
 				{/if}
 				</div>
-			</div>
 		</div>
 		<div class="clock">
 			<div style="height: auto; display:flex; justify-content: space-around; text-align: center;">
 				<div class="hourMeter" style="width: 50%; height: 100%">
 					<svg width="80" height="200" style="width: 80%; border: 3px solid green;">
 						<rect x= "0" y= "{198 - clock.time.hour * 8.53}" width="100%" height="200" style="fill:rgb(0,0,255);stroke:rgb(0,0,0)" />
-						<!--	{#each [...Array(24).keys()] as hour}
-								<line x1="0.1" y1="{198 - hour*8.925}" x2="20%" y2="{198 - hour*8.925}" style="stroke:rgb(255,0,0);stroke-width:2" />
-							{/each}	 -->
 						<text class="tttt" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">{clock.time.hour.toString().padStart(2, "0")}</text>
 					</svg> 
 				</div>
@@ -345,17 +360,10 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 					<svg width="80" height="200" style="width: 80%; border: 3px solid green;">
 						  
 						<rect x= "0" y= "{198 - clock.time.minute*3.33}" width="100%" height="200" style="fill:rgb(0,0,255);stroke:rgb(0,0,0);" />
-							<!-- {#each [...Array(60).keys()].map(x => x + 1) as min}
-								{#if min %5 == 0}
-									<line x1="0.1" y1="{202 - min*3.34}" x2="30%" y2="{202 - min*3.34}" style="stroke:rgb(255,0,0);stroke-width:2" />
-									{:else}
-										<line x1="0.1" y1="{202 - min*3.34}" x2="20%" y2="{202 - min*3.34}" style="stroke:rgb(255,0,0);stroke-width:2" />
-								{/if}
-							{/each} -->
 						<text class="tttt" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">{clock.time.minute.toString().padStart(2, "0")}</text>	
 				</div>					
 			</div> 
-			<div>
+			<div style="margin-top: 5px;">
 				<input bind:value={alarm} type="time">
 			{#if clock._alarmIsActive}
 				<button class="disableAlarm" on:click={()=>{ clock.deactivateAlarm(); alarm = ""; }}>Disable</button>
@@ -363,15 +371,13 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgba(
 				<button class="setAlarm" on:click={activateAlarm}>Set Alarm</button>
 			{/if}
 
-			{#if clock._alarmIsActive}
+			{#if clock._alarmIsActive && !clock.isTriggered}
 				<p in:fade>Alarm set to: <b>{clock.alarm}</b></p>
-			{:else if (alarmNotDefined)}
-				<p in:fade>Set alarm to valid time</p>
+			{:else if (alarmNotDefined && !clock.isTriggered)}
+				<p in:fade>Set alarm to a valid time</p>
 			{/if}
 			</div>
 		</div>
 	</div>
-
-	<button class="addtime" on:click={tick}> HIT ME! </button>
 
 </main>

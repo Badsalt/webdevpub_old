@@ -1,2 +1,2340 @@
-var app=function(){"use strict";function t(){}const e=t=>t;function n(t){return t()}function i(){return Object.create(null)}function o(t){t.forEach(n)}function r(t){return"function"==typeof t}function s(t,e){return t!=t?e==e:t!==e||t&&"object"==typeof t||"function"==typeof t}function l(e,n,i){e.$$.on_destroy.push(function(e,...n){if(null==e)return t;const i=e.subscribe(...n);return i.unsubscribe?()=>i.unsubscribe():i}(n,i))}const c="undefined"!=typeof window;let a=c?()=>window.performance.now():()=>Date.now(),u=c?t=>requestAnimationFrame(t):t;const m=new Set;function d(t){m.forEach((e=>{e.c(t)||(m.delete(e),e.f())})),0!==m.size&&u(d)}function f(t){let e;return 0===m.size&&u(d),{promise:new Promise((n=>{m.add(e={c:t,f:n})})),abort(){m.delete(e)}}}function p(t,e){t.appendChild(e)}function h(t){if(!t)return document;const e=t.getRootNode?t.getRootNode():t.ownerDocument;return e&&e.host?e:t.ownerDocument}function v(t){const e=_("style");return function(t,e){p(t.head||t,e)}(h(t),e),e}function g(t,e,n){t.insertBefore(e,n||null)}function y(t){t.parentNode.removeChild(t)}function b(t,e){for(let n=0;n<t.length;n+=1)t[n]&&t[n].d(e)}function _(t){return document.createElement(t)}function k(t){return document.createElementNS("http://www.w3.org/2000/svg",t)}function $(t){return document.createTextNode(t)}function x(){return $(" ")}function w(t,e,n,i){return t.addEventListener(e,n,i),()=>t.removeEventListener(e,n,i)}function j(t,e,n){null==n?t.removeAttribute(e):t.getAttribute(e)!==n&&t.setAttribute(e,n)}function A(t,e){e=""+e,t.wholeText!==e&&(t.data=e)}function z(t,e){t.value=null==e?"":e}function S(t,e,n,i){t.style.setProperty(e,n,i?"important":"")}const C=new Set;let E,I=0;function T(t,e){const n=(t.style.animation||"").split(", "),i=n.filter(e?t=>t.indexOf(e)<0:t=>-1===t.indexOf("__svelte")),o=n.length-i.length;o&&(t.style.animation=i.join(", "),I-=o,I||u((()=>{I||(C.forEach((t=>{const e=t.__svelte_stylesheet;let n=e.cssRules.length;for(;n--;)e.deleteRule(n);t.__svelte_rules={}})),C.clear())})))}function D(t){E=t}const M=[],O=[],N=[],P=[],R=Promise.resolve();let L=!1;function q(t){N.push(t)}let B=!1;const H=new Set;function W(){if(!B){B=!0;do{for(let t=0;t<M.length;t+=1){const e=M[t];D(e),F(e.$$)}for(D(null),M.length=0;O.length;)O.pop()();for(let t=0;t<N.length;t+=1){const e=N[t];H.has(e)||(H.add(e),e())}N.length=0}while(M.length);for(;P.length;)P.pop()();L=!1,B=!1,H.clear()}}function F(t){if(null!==t.fragment){t.update(),o(t.before_update);const e=t.dirty;t.dirty=[-1],t.fragment&&t.fragment.p(t.ctx,e),t.after_update.forEach(q)}}let U;function G(t,e,n){t.dispatchEvent(function(t,e,n=!1){const i=document.createEvent("CustomEvent");return i.initCustomEvent(t,n,!1,e),i}(`${e?"intro":"outro"}${n}`))}const J=new Set;let K;function Q(){K={r:0,c:[],p:K}}function V(){K.r||o(K.c),K=K.p}function X(t,e){t&&t.i&&(J.delete(t),t.i(e))}function Y(t,e,n,i){if(t&&t.o){if(J.has(t))return;J.add(t),K.c.push((()=>{J.delete(t),i&&(n&&t.d(1),i())})),t.o(e)}}const Z={duration:0};function tt(n,i,o){let s,l,c=i(n,o),u=!1,m=0;function d(){s&&T(n,s)}function p(){const{delay:i=0,duration:o=300,easing:r=e,tick:p=t,css:g}=c||Z;g&&(s=function(t,e,n,i,o,r,s,l=0){const c=16.666/i;let a="{\n";for(let t=0;t<=1;t+=c){const i=e+(n-e)*r(t);a+=100*t+`%{${s(i,1-i)}}\n`}const u=a+`100% {${s(n,1-n)}}\n}`,m=`__svelte_${function(t){let e=5381,n=t.length;for(;n--;)e=(e<<5)-e^t.charCodeAt(n);return e>>>0}(u)}_${l}`,d=h(t);C.add(d);const f=d.__svelte_stylesheet||(d.__svelte_stylesheet=v(t).sheet),p=d.__svelte_rules||(d.__svelte_rules={});p[m]||(p[m]=!0,f.insertRule(`@keyframes ${m} ${u}`,f.cssRules.length));const g=t.style.animation||"";return t.style.animation=`${g?`${g}, `:""}${m} ${i}ms linear ${o}ms 1 both`,I+=1,m}(n,0,1,o,i,r,g,m++)),p(0,1);const y=a()+i,b=y+o;l&&l.abort(),u=!0,q((()=>G(n,!0,"start"))),l=f((t=>{if(u){if(t>=b)return p(1,0),G(n,!0,"end"),d(),u=!1;if(t>=y){const e=r((t-y)/o);p(e,1-e)}}return u}))}let g=!1;return{start(){g||(g=!0,T(n),r(c)?(c=c(),(U||(U=Promise.resolve(),U.then((()=>{U=null}))),U).then(p)):p())},invalidate(){g=!1},end(){u&&(d(),u=!1)}}}function et(t,e){-1===t.$$.dirty[0]&&(M.push(t),L||(L=!0,R.then(W)),t.$$.dirty.fill(0)),t.$$.dirty[e/31|0]|=1<<e%31}function nt(e,s,l,c,a,u,m,d=[-1]){const f=E;D(e);const p=e.$$={fragment:null,ctx:null,props:u,update:t,not_equal:a,bound:i(),on_mount:[],on_destroy:[],on_disconnect:[],before_update:[],after_update:[],context:new Map(s.context||(f?f.$$.context:[])),callbacks:i(),dirty:d,skip_bound:!1,root:s.target||f.$$.root};m&&m(p.root);let h=!1;if(p.ctx=l?l(e,s.props||{},((t,n,...i)=>{const o=i.length?i[0]:n;return p.ctx&&a(p.ctx[t],p.ctx[t]=o)&&(!p.skip_bound&&p.bound[t]&&p.bound[t](o),h&&et(e,t)),n})):[],p.update(),h=!0,o(p.before_update),p.fragment=!!c&&c(p.ctx),s.target){if(s.hydrate){const t=function(t){return Array.from(t.childNodes)}(s.target);p.fragment&&p.fragment.l(t),t.forEach(y)}else p.fragment&&p.fragment.c();s.intro&&X(e.$$.fragment),function(t,e,i,s){const{fragment:l,on_mount:c,on_destroy:a,after_update:u}=t.$$;l&&l.m(e,i),s||q((()=>{const e=c.map(n).filter(r);a?a.push(...e):o(e),t.$$.on_mount=[]})),u.forEach(q)}(e,s.target,s.anchor,s.customElement),W()}D(f)}class it{constructor(t,e){if(t<0||23<t)throw Error("The hour argument must be between 0 and 23");if(this._hour=t,e<0||e>60)throw Error("Error: minute value must be >= 0 and < 60");this._minute=e}tick(){this._minute++,60==this._minute&&(this._minute=0,this._hour=(this._hour+1)%24)}set alarm(t){this._alarmIsActive=!0,this._alarm=t}get alarm(){return this._alarm}deactivateAlarm(){this._alarmIsActive=!1}activateAlarm(){this._alarmIsActive=!0}get isTriggered(){if(this._alarmIsActive)return this.time.hour.toString().padStart(2,"0")+":"+this.time.minute.toString().padStart(2,"0")>=this._alarm}get time(){return{hour:this._hour,minute:this._minute}}}function ot(t){const e=t-1;return e*e*e+1}function rt(t,{delay:n=0,duration:i=400,easing:o=e}={}){const r=+getComputedStyle(t).opacity;return{delay:n,duration:i,easing:o,css:t=>"opacity: "+t*r}}function st(t,{delay:e=0,duration:n=400,easing:i=ot,x:o=0,y:r=0,opacity:s=0}={}){const l=getComputedStyle(t),c=+l.opacity,a="none"===l.transform?"":l.transform,u=c*(1-s);return{delay:e,duration:n,easing:i,css:(t,e)=>`\n\t\t\ttransform: ${a} translate(${(1-t)*o}px, ${(1-t)*r}px);\n\t\t\topacity: ${c-u*e}`}}const lt=[];function ct(t){return"[object Date]"===Object.prototype.toString.call(t)}function at(t,e,n,i){if("number"==typeof n||ct(n)){const o=i-n,r=(n-e)/(t.dt||1/60),s=(r+(t.opts.stiffness*o-t.opts.damping*r)*t.inv_mass)*t.dt;return Math.abs(s)<t.opts.precision&&Math.abs(o)<t.opts.precision?i:(t.settled=!1,ct(n)?new Date(n.getTime()+s):n+s)}if(Array.isArray(n))return n.map(((o,r)=>at(t,e[r],n[r],i[r])));if("object"==typeof n){const o={};for(const r in n)o[r]=at(t,e[r],n[r],i[r]);return o}throw new Error(`Cannot spring ${typeof n} values`)}function ut(e,n={}){const i=function(e,n=t){let i;const o=new Set;function r(t){if(s(e,t)&&(e=t,i)){const t=!lt.length;for(const t of o)t[1](),lt.push(t,e);if(t){for(let t=0;t<lt.length;t+=2)lt[t][0](lt[t+1]);lt.length=0}}}return{set:r,update:function(t){r(t(e))},subscribe:function(s,l=t){const c=[s,l];return o.add(c),1===o.size&&(i=n(r)||t),s(e),()=>{o.delete(c),0===o.size&&(i(),i=null)}}}}(e),{stiffness:o=.15,damping:r=.8,precision:l=.01}=n;let c,u,m,d=e,p=e,h=1,v=0,g=!1;function y(t,n={}){p=t;const o=m={};if(null==e||n.hard||b.stiffness>=1&&b.damping>=1)return g=!0,c=a(),d=t,i.set(e=p),Promise.resolve();if(n.soft){const t=!0===n.soft?.5:+n.soft;v=1/(60*t),h=0}return u||(c=a(),g=!1,u=f((t=>{if(g)return g=!1,u=null,!1;h=Math.min(h+v,1);const n={inv_mass:h,opts:b,settled:!0,dt:60*(t-c)/1e3},o=at(n,d,e,p);return c=t,d=e,i.set(e=o),n.settled&&(u=null),!n.settled}))),new Promise((t=>{u.promise.then((()=>{o===m&&t()}))}))}const b={set:y,update:(t,n)=>y(t(p,e),n),subscribe:i.subscribe,stiffness:o,damping:r,precision:l};return b}function mt(t,e,n){const i=t.slice();return i[13]=e[n],i}function dt(t,e,n){const i=t.slice();return i[16]=e[n],i}function ft(t){let e;return{c(){e=_("div"),e.innerHTML='<h2 class="alarmclock svelte-noizjk">Wake up!!</h2>',j(e,"class","alarmWakeUp svelte-noizjk"),S(e,"display","inline-block")},m(t,n){g(t,e,n)},d(t){t&&y(e)}}}function pt(e){let n,i,o,r=e[0].time.hour.toString().padStart(2,"0")+"";return{c(){n=_("span"),i=$(r),S(n,"position","absolute"),S(n,"margin","0"),S(n,"top","0px"),S(n,"left","0"),j(n,"class","time svelte-noizjk")},m(t,e){g(t,n,e),p(n,i)},p(t,e){1&e&&r!==(r=t[0].time.hour.toString().padStart(2,"0")+"")&&A(i,r)},i(t){o||q((()=>{o=tt(n,st,{y:-25}),o.start()}))},o:t,d(t){t&&y(n)}}}function ht(e){let n,i,o,r=e[0].time.minute.toString().padStart(2,"0")+"";return{c(){n=_("span"),i=$(r),S(n,"position","absolute"),S(n,"margin","0"),S(n,"top","0"),S(n,"right","5px"),j(n,"class","time svelte-noizjk")},m(t,e){g(t,n,e),p(n,i)},p(t,e){1&e&&r!==(r=t[0].time.minute.toString().padStart(2,"0")+"")&&A(i,r)},i(t){o||q((()=>{o=tt(n,st,{y:-25}),o.start()}))},o:t,d(t){t&&y(n)}}}function vt(e){let n,i,o;return{c(){n=_("button"),n.textContent="Set Alarm",j(n,"class","setAlarm svelte-noizjk")},m(t,r){g(t,n,r),i||(o=w(n,"click",e[6]),i=!0)},p:t,d(t){t&&y(n),i=!1,o()}}}function gt(e){let n,i,o;return{c(){n=_("button"),n.textContent="Disable",j(n,"class","disableAlarm svelte-noizjk")},m(t,r){g(t,n,r),i||(o=w(n,"click",e[8]),i=!0)},p:t,d(t){t&&y(n),i=!1,o()}}}function yt(e){let n,i;return{c(){n=_("p"),n.textContent="Set alarm to valid time"},m(t,e){g(t,n,e)},p:t,i(t){i||q((()=>{i=tt(n,rt,{}),i.start()}))},o:t,d(t){t&&y(n)}}}function bt(e){let n,i,o,r,s,l=e[0].alarm+"";return{c(){n=_("p"),i=$("Alarm set to: "),o=_("b"),r=$(l)},m(t,e){g(t,n,e),p(n,i),p(n,o),p(o,r)},p(t,e){1&e&&l!==(l=t[0].alarm+"")&&A(r,l)},i(t){s||q((()=>{s=tt(n,rt,{}),s.start()}))},o:t,d(t){t&&y(n)}}}function _t(t){let e,n;return{c(){e=k("line"),j(e,"class","minor svelte-noizjk"),j(e,"y1","42"),j(e,"y2","45"),j(e,"transform",n="rotate("+6*(t[13]+t[16])+")")},m(t,n){g(t,e,n)},d(t){t&&y(e)}}}function kt(e){let n,i,o,r=[1,2,3,4],s=[];for(let t=0;t<4;t+=1)s[t]=_t(dt(e,r,t));return{c(){n=k("line");for(let t=0;t<4;t+=1)s[t].c();o=$(""),j(n,"class","major svelte-noizjk"),j(n,"y1","35"),j(n,"y2","45"),j(n,"transform",i="rotate("+30*e[13]+")")},m(t,e){g(t,n,e);for(let n=0;n<4;n+=1)s[n].m(t,e);g(t,o,e)},p:t,d(t){t&&y(n),b(s,t),t&&y(o)}}}function $t(e){let n,i,o;return{c(){n=_("button"),n.textContent="Set Alarm",j(n,"class","setAlarm svelte-noizjk")},m(t,r){g(t,n,r),i||(o=w(n,"click",e[6]),i=!0)},p:t,d(t){t&&y(n),i=!1,o()}}}function xt(e){let n,i,o;return{c(){n=_("button"),n.textContent="Disable",j(n,"class","disableAlarm svelte-noizjk")},m(t,r){g(t,n,r),i||(o=w(n,"click",e[10]),i=!0)},p:t,d(t){t&&y(n),i=!1,o()}}}function wt(e){let n,i;return{c(){n=_("p"),n.textContent="Set alarm to valid time"},m(t,e){g(t,n,e)},p:t,i(t){i||q((()=>{i=tt(n,rt,{}),i.start()}))},o:t,d(t){t&&y(n)}}}function jt(e){let n,i,o,r,s,l=e[0].alarm+"";return{c(){n=_("p"),i=$("Alarm set to: "),o=_("b"),r=$(l)},m(t,e){g(t,n,e),p(n,i),p(n,o),p(o,r)},p(t,e){1&e&&l!==(l=t[0].alarm+"")&&A(r,l)},i(t){s||q((()=>{s=tt(n,rt,{}),s.start()}))},o:t,d(t){t&&y(n)}}}function At(e){let n,i,o;return{c(){n=_("button"),n.textContent="Set Alarm",j(n,"class","setAlarm svelte-noizjk")},m(t,r){g(t,n,r),i||(o=w(n,"click",e[6]),i=!0)},p:t,d(t){t&&y(n),i=!1,o()}}}function zt(e){let n,i,o;return{c(){n=_("button"),n.textContent="Disable",j(n,"class","disableAlarm svelte-noizjk")},m(t,r){g(t,n,r),i||(o=w(n,"click",e[12]),i=!0)},p:t,d(t){t&&y(n),i=!1,o()}}}function St(e){let n,i;return{c(){n=_("p"),n.textContent="Set alarm to valid time"},m(t,e){g(t,n,e)},p:t,i(t){i||q((()=>{i=tt(n,rt,{}),i.start()}))},o:t,d(t){t&&y(n)}}}function Ct(e){let n,i,o,r,s,l=e[0].alarm+"";return{c(){n=_("p"),i=$("Alarm set to: "),o=_("b"),r=$(l)},m(t,e){g(t,n,e),p(n,i),p(n,o),p(o,r)},p(t,e){1&e&&l!==(l=t[0].alarm+"")&&A(r,l)},i(t){s||q((()=>{s=tt(n,rt,{}),s.start()}))},o:t,d(t){t&&y(n)}}}function Et(e){let n,i,r,l,c,a,u,m,d,f,h,v,C,E,I,T,D,M,O,N,P,R,L,q,B,H,W,F,U,G,J,K,Z,tt,et,nt,it,ot,rt,st,lt,ct,at,ut,dt,_t,Et,It,Tt,Dt,Mt,Ot,Nt,Pt,Rt,Lt,qt,Bt=e[0].time.hour,Ht=e[0].time.minute,Wt=e[0].time.hour.toString().padStart(2,"0")+"",Ft=e[0].time.minute.toString().padStart(2,"0")+"",Ut=e[0].isTriggered&&ft(),Gt=pt(e),Jt=ht(e);function Kt(t,e){return t[0]._alarmIsActive?gt:t[0]._alarmIsActive?void 0:vt}let Qt=Kt(e),Vt=Qt&&Qt(e);function Xt(t,e){return t[0]._alarmIsActive?bt:t[2]?yt:void 0}let Yt=Xt(e),Zt=Yt&&Yt(e),te=[0,5,10,15,20,25,30,35,40,45,50,55],ee=[];for(let t=0;t<12;t+=1)ee[t]=kt(mt(e,te,t));function ne(t,e){return t[0]._alarmIsActive?xt:t[0]._alarmIsActive?void 0:$t}let ie=ne(e),oe=ie&&ie(e);function re(t,e){return t[0]._alarmIsActive?jt:t[2]?wt:void 0}let se=re(e),le=se&&se(e);function ce(t,e){return t[0]._alarmIsActive?zt:t[0]._alarmIsActive?void 0:At}let ae=ce(e),ue=ae&&ae(e);function me(t,e){return t[0]._alarmIsActive?Ct:t[2]?St:void 0}let de=me(e),fe=de&&de(e);return{c(){n=_("link"),i=x(),r=_("main"),l=_("h1"),l.textContent="Clock",c=x(),a=_("div"),u=_("div"),m=_("div"),Ut&&Ut.c(),d=x(),f=_("div"),Gt.c(),h=x(),v=_("span"),v.textContent=":",C=x(),Jt.c(),E=x(),I=_("div"),T=_("input"),D=x(),Vt&&Vt.c(),M=x(),Zt&&Zt.c(),O=x(),N=_("div"),P=_("div"),R=k("svg"),L=k("circle");for(let t=0;t<12;t+=1)ee[t].c();q=k("line"),H=k("line"),F=x(),U=_("div"),G=_("input"),J=x(),oe&&oe.c(),K=x(),le&&le.c(),Z=x(),tt=_("div"),et=_("div"),nt=_("div"),it=k("svg"),ot=k("rect"),st=k("text"),lt=$(Wt),ct=x(),at=_("div"),ut=k("svg"),dt=k("rect"),Et=k("text"),It=$(Ft),Tt=x(),Dt=_("div"),Mt=_("input"),Ot=x(),ue&&ue.c(),Nt=x(),fe&&fe.c(),Pt=x(),Rt=_("button"),Rt.textContent="HIT ME!",j(n,"href","https://fonts.googleapis.com/css?family=Orbitron"),j(n,"rel","stylesheet"),j(n,"type","text/css"),S(v,"font-size","3em"),S(v,"position","absolute"),S(v,"margin","0"),S(v,"top","-9px"),S(v,"botton","5px"),S(v,"left","95px"),S(v,"display","inline-block"),S(v,"height","5px"),j(f,"id","digitalClock"),j(f,"class","svelte-noizjk"),S(m,"position","relative"),S(m,"height","200px"),j(T,"type","time"),j(T,"class","svelte-noizjk"),j(I,"class","item"),j(u,"class","clock svelte-noizjk"),j(L,"class","clock-face svelte-noizjk"),j(L,"r","48"),j(q,"class","hour svelte-noizjk"),j(q,"y1","2"),j(q,"y2","-20"),j(q,"transform",B="rotate("+.5*e[3]+")"),j(H,"class","minute svelte-noizjk"),j(H,"y1","4"),j(H,"y2","-30"),j(H,"transform",W="rotate("+6*e[3]+")"),j(R,"viewBox","-50 -50 100 100"),S(R,"width","70%"),S(R,"height","100%"),j(R,"class","svelte-noizjk"),j(G,"type","time"),j(G,"class","svelte-noizjk"),j(P,"class","item"),S(P,"height","200px"),j(N,"class","clock svelte-noizjk"),j(ot,"x","0"),j(ot,"y",rt=198-8.53*e[0].time.hour),j(ot,"width","100%"),j(ot,"height","200"),S(ot,"fill","rgb(0,0,255)"),S(ot,"stroke","rgb(0,0,0)"),j(st,"class","tttt svelte-noizjk"),j(st,"x","50%"),j(st,"y","50%"),j(st,"dominant-baseline","middle"),j(st,"text-anchor","middle"),j(it,"width","80"),j(it,"height","200"),S(it,"width","80%"),S(it,"border","3px solid green"),j(it,"class","svelte-noizjk"),j(nt,"class","hourMeter"),S(nt,"width","50%"),S(nt,"height","100%"),j(dt,"x","0"),j(dt,"y",_t=198-3.33*e[0].time.minute),j(dt,"width","100%"),j(dt,"height","200"),S(dt,"fill","rgb(0,0,255)"),S(dt,"stroke","rgb(0,0,0)"),j(Et,"class","tttt svelte-noizjk"),j(Et,"x","50%"),j(Et,"y","50%"),j(Et,"dominant-baseline","middle"),j(Et,"text-anchor","middle"),j(ut,"width","80"),j(ut,"height","200"),S(ut,"width","80%"),S(ut,"border","3px solid green"),j(ut,"class","svelte-noizjk"),j(at,"class","minuteMeter"),S(at,"width","50%"),S(at,"height","100%"),S(et,"height","auto"),S(et,"display","flex"),S(et,"justify-content","space-around"),S(et,"text-align","center"),j(Mt,"type","time"),j(Mt,"class","svelte-noizjk"),j(tt,"class","clock svelte-noizjk"),j(a,"class","container svelte-noizjk"),j(Rt,"class","addtime svelte-noizjk"),j(r,"class","svelte-noizjk")},m(t,o){g(t,n,o),g(t,i,o),g(t,r,o),p(r,l),p(r,c),p(r,a),p(a,u),p(u,m),Ut&&Ut.m(m,null),p(m,d),p(m,f),Gt.m(f,null),p(f,h),p(f,v),p(f,C),Jt.m(f,null),p(u,E),p(u,I),p(I,T),z(T,e[1]),p(I,D),Vt&&Vt.m(I,null),p(I,M),Zt&&Zt.m(I,null),p(a,O),p(a,N),p(N,P),p(P,R),p(R,L);for(let t=0;t<12;t+=1)ee[t].m(R,null);p(R,q),p(R,H),p(P,F),p(P,U),p(U,G),z(G,e[1]),p(U,J),oe&&oe.m(U,null),p(U,K),le&&le.m(U,null),p(a,Z),p(a,tt),p(tt,et),p(et,nt),p(nt,it),p(it,ot),p(it,st),p(st,lt),p(et,ct),p(et,at),p(at,ut),p(ut,dt),p(ut,Et),p(Et,It),p(tt,Tt),p(tt,Dt),p(Dt,Mt),z(Mt,e[1]),p(Dt,Ot),ue&&ue.m(Dt,null),p(Dt,Nt),fe&&fe.m(Dt,null),p(r,Pt),p(r,Rt),Lt||(qt=[w(T,"input",e[7]),w(G,"input",e[9]),w(Mt,"input",e[11]),w(Rt,"click",e[5])],Lt=!0)},p(e,[n]){e[0].isTriggered?Ut||(Ut=ft(),Ut.c(),Ut.m(m,d)):Ut&&(Ut.d(1),Ut=null),1&n&&s(Bt,Bt=e[0].time.hour)?(Q(),Y(Gt,1,1,t),V(),Gt=pt(e),Gt.c(),X(Gt),Gt.m(f,h)):Gt.p(e,n),1&n&&s(Ht,Ht=e[0].time.minute)?(Q(),Y(Jt,1,1,t),V(),Jt=ht(e),Jt.c(),X(Jt),Jt.m(f,null)):Jt.p(e,n),2&n&&z(T,e[1]),Qt===(Qt=Kt(e))&&Vt?Vt.p(e,n):(Vt&&Vt.d(1),Vt=Qt&&Qt(e),Vt&&(Vt.c(),Vt.m(I,M))),Yt===(Yt=Xt(e))&&Zt?Zt.p(e,n):(Zt&&Zt.d(1),Zt=Yt&&Yt(e),Zt&&(Zt.c(),X(Zt,1),Zt.m(I,null))),8&n&&B!==(B="rotate("+.5*e[3]+")")&&j(q,"transform",B),8&n&&W!==(W="rotate("+6*e[3]+")")&&j(H,"transform",W),2&n&&z(G,e[1]),ie===(ie=ne(e))&&oe?oe.p(e,n):(oe&&oe.d(1),oe=ie&&ie(e),oe&&(oe.c(),oe.m(U,K))),se===(se=re(e))&&le?le.p(e,n):(le&&le.d(1),le=se&&se(e),le&&(le.c(),X(le,1),le.m(U,null))),1&n&&rt!==(rt=198-8.53*e[0].time.hour)&&j(ot,"y",rt),1&n&&Wt!==(Wt=e[0].time.hour.toString().padStart(2,"0")+"")&&A(lt,Wt),1&n&&_t!==(_t=198-3.33*e[0].time.minute)&&j(dt,"y",_t),1&n&&Ft!==(Ft=e[0].time.minute.toString().padStart(2,"0")+"")&&A(It,Ft),2&n&&z(Mt,e[1]),ae===(ae=ce(e))&&ue?ue.p(e,n):(ue&&ue.d(1),ue=ae&&ae(e),ue&&(ue.c(),ue.m(Dt,Nt))),de===(de=me(e))&&fe?fe.p(e,n):(fe&&fe.d(1),fe=de&&de(e),fe&&(fe.c(),X(fe,1),fe.m(Dt,null)))},i(t){X(Gt),X(Jt),X(Zt),X(le),X(fe)},o(t){Y(Gt),Y(Jt)},d(t){t&&y(n),t&&y(i),t&&y(r),Ut&&Ut.d(),Gt.d(t),Jt.d(t),Vt&&Vt.d(),Zt&&Zt.d(),b(ee,t),oe&&oe.d(),le&&le.d(),ue&&ue.d(),fe&&fe.d(),Lt=!1,o(qt)}}}function It(t,e,n){let i,o,r=new it(23,37),s=!1,c=ut(60*parseInt(r.time.hour)+parseInt(r.time.minute));function a(){r.tick(),c.set(60*parseInt(r.time.hour)+parseInt(r.time.minute)),n(0,r)}l(t,c,(t=>n(3,i=t))),setInterval(a,1e3);return[r,o,s,i,c,a,function(){o?(n(0,r.alarm=o,r),n(2,s=!1)):n(2,s=!0)},function(){o=this.value,n(1,o)},()=>{r.deactivateAlarm(),n(1,o="")},function(){o=this.value,n(1,o)},()=>{r.deactivateAlarm(),n(1,o="")},function(){o=this.value,n(1,o)},()=>{r.deactivateAlarm(),n(1,o="")}]}return new class extends class{$destroy(){!function(t,e){const n=t.$$;null!==n.fragment&&(o(n.on_destroy),n.fragment&&n.fragment.d(e),n.on_destroy=n.fragment=null,n.ctx=[])}(this,1),this.$destroy=t}$on(t,e){const n=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return n.push(e),()=>{const t=n.indexOf(e);-1!==t&&n.splice(t,1)}}$set(t){var e;this.$$set&&(e=t,0!==Object.keys(e).length)&&(this.$$.skip_bound=!0,this.$$set(t),this.$$.skip_bound=!1)}}{constructor(t){super(),nt(this,t,It,Et,s,{})}}({target:document.body})}();
+
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+var app = (function () {
+    'use strict';
+
+    function noop() { }
+    const identity = x => x;
+    function add_location(element, file, line, column, char) {
+        element.__svelte_meta = {
+            loc: { file, line, column, char }
+        };
+    }
+    function run(fn) {
+        return fn();
+    }
+    function blank_object() {
+        return Object.create(null);
+    }
+    function run_all(fns) {
+        fns.forEach(run);
+    }
+    function is_function(thing) {
+        return typeof thing === 'function';
+    }
+    function safe_not_equal(a, b) {
+        return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+    function is_empty(obj) {
+        return Object.keys(obj).length === 0;
+    }
+    function validate_store(store, name) {
+        if (store != null && typeof store.subscribe !== 'function') {
+            throw new Error(`'${name}' is not a store with a 'subscribe' method`);
+        }
+    }
+    function subscribe(store, ...callbacks) {
+        if (store == null) {
+            return noop;
+        }
+        const unsub = store.subscribe(...callbacks);
+        return unsub.unsubscribe ? () => unsub.unsubscribe() : unsub;
+    }
+    function component_subscribe(component, store, callback) {
+        component.$$.on_destroy.push(subscribe(store, callback));
+    }
+
+    const is_client = typeof window !== 'undefined';
+    let now = is_client
+        ? () => window.performance.now()
+        : () => Date.now();
+    let raf = is_client ? cb => requestAnimationFrame(cb) : noop;
+
+    const tasks = new Set();
+    function run_tasks(now) {
+        tasks.forEach(task => {
+            if (!task.c(now)) {
+                tasks.delete(task);
+                task.f();
+            }
+        });
+        if (tasks.size !== 0)
+            raf(run_tasks);
+    }
+    /**
+     * Creates a new task that runs on each raf frame
+     * until it returns a falsy value or is aborted
+     */
+    function loop(callback) {
+        let task;
+        if (tasks.size === 0)
+            raf(run_tasks);
+        return {
+            promise: new Promise(fulfill => {
+                tasks.add(task = { c: callback, f: fulfill });
+            }),
+            abort() {
+                tasks.delete(task);
+            }
+        };
+    }
+    function append(target, node) {
+        target.appendChild(node);
+    }
+    function get_root_for_style(node) {
+        if (!node)
+            return document;
+        const root = node.getRootNode ? node.getRootNode() : node.ownerDocument;
+        if (root && root.host) {
+            return root;
+        }
+        return node.ownerDocument;
+    }
+    function append_empty_stylesheet(node) {
+        const style_element = element('style');
+        append_stylesheet(get_root_for_style(node), style_element);
+        return style_element;
+    }
+    function append_stylesheet(node, style) {
+        append(node.head || node, style);
+    }
+    function insert(target, node, anchor) {
+        target.insertBefore(node, anchor || null);
+    }
+    function detach(node) {
+        node.parentNode.removeChild(node);
+    }
+    function destroy_each(iterations, detaching) {
+        for (let i = 0; i < iterations.length; i += 1) {
+            if (iterations[i])
+                iterations[i].d(detaching);
+        }
+    }
+    function element(name) {
+        return document.createElement(name);
+    }
+    function svg_element(name) {
+        return document.createElementNS('http://www.w3.org/2000/svg', name);
+    }
+    function text(data) {
+        return document.createTextNode(data);
+    }
+    function space() {
+        return text(' ');
+    }
+    function empty() {
+        return text('');
+    }
+    function listen(node, event, handler, options) {
+        node.addEventListener(event, handler, options);
+        return () => node.removeEventListener(event, handler, options);
+    }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else if (node.getAttribute(attribute) !== value)
+            node.setAttribute(attribute, value);
+    }
+    function children(element) {
+        return Array.from(element.childNodes);
+    }
+    function set_input_value(input, value) {
+        input.value = value == null ? '' : value;
+    }
+    function set_style(node, key, value, important) {
+        node.style.setProperty(key, value, important ? 'important' : '');
+    }
+    function custom_event(type, detail, bubbles = false) {
+        const e = document.createEvent('CustomEvent');
+        e.initCustomEvent(type, bubbles, false, detail);
+        return e;
+    }
+
+    const active_docs = new Set();
+    let active = 0;
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+        let hash = 5381;
+        let i = str.length;
+        while (i--)
+            hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+        return hash >>> 0;
+    }
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+        const step = 16.666 / duration;
+        let keyframes = '{\n';
+        for (let p = 0; p <= 1; p += step) {
+            const t = a + (b - a) * ease(p);
+            keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+        }
+        const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+        const name = `__svelte_${hash(rule)}_${uid}`;
+        const doc = get_root_for_style(node);
+        active_docs.add(doc);
+        const stylesheet = doc.__svelte_stylesheet || (doc.__svelte_stylesheet = append_empty_stylesheet(node).sheet);
+        const current_rules = doc.__svelte_rules || (doc.__svelte_rules = {});
+        if (!current_rules[name]) {
+            current_rules[name] = true;
+            stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+        }
+        const animation = node.style.animation || '';
+        node.style.animation = `${animation ? `${animation}, ` : ''}${name} ${duration}ms linear ${delay}ms 1 both`;
+        active += 1;
+        return name;
+    }
+    function delete_rule(node, name) {
+        const previous = (node.style.animation || '').split(', ');
+        const next = previous.filter(name
+            ? anim => anim.indexOf(name) < 0 // remove specific animation
+            : anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+        );
+        const deleted = previous.length - next.length;
+        if (deleted) {
+            node.style.animation = next.join(', ');
+            active -= deleted;
+            if (!active)
+                clear_rules();
+        }
+    }
+    function clear_rules() {
+        raf(() => {
+            if (active)
+                return;
+            active_docs.forEach(doc => {
+                const stylesheet = doc.__svelte_stylesheet;
+                let i = stylesheet.cssRules.length;
+                while (i--)
+                    stylesheet.deleteRule(i);
+                doc.__svelte_rules = {};
+            });
+            active_docs.clear();
+        });
+    }
+
+    let current_component;
+    function set_current_component(component) {
+        current_component = component;
+    }
+
+    const dirty_components = [];
+    const binding_callbacks = [];
+    const render_callbacks = [];
+    const flush_callbacks = [];
+    const resolved_promise = Promise.resolve();
+    let update_scheduled = false;
+    function schedule_update() {
+        if (!update_scheduled) {
+            update_scheduled = true;
+            resolved_promise.then(flush);
+        }
+    }
+    function add_render_callback(fn) {
+        render_callbacks.push(fn);
+    }
+    let flushing = false;
+    const seen_callbacks = new Set();
+    function flush() {
+        if (flushing)
+            return;
+        flushing = true;
+        do {
+            // first, call beforeUpdate functions
+            // and update components
+            for (let i = 0; i < dirty_components.length; i += 1) {
+                const component = dirty_components[i];
+                set_current_component(component);
+                update(component.$$);
+            }
+            set_current_component(null);
+            dirty_components.length = 0;
+            while (binding_callbacks.length)
+                binding_callbacks.pop()();
+            // then, once components are updated, call
+            // afterUpdate functions. This may cause
+            // subsequent updates...
+            for (let i = 0; i < render_callbacks.length; i += 1) {
+                const callback = render_callbacks[i];
+                if (!seen_callbacks.has(callback)) {
+                    // ...so guard against infinite loops
+                    seen_callbacks.add(callback);
+                    callback();
+                }
+            }
+            render_callbacks.length = 0;
+        } while (dirty_components.length);
+        while (flush_callbacks.length) {
+            flush_callbacks.pop()();
+        }
+        update_scheduled = false;
+        flushing = false;
+        seen_callbacks.clear();
+    }
+    function update($$) {
+        if ($$.fragment !== null) {
+            $$.update();
+            run_all($$.before_update);
+            const dirty = $$.dirty;
+            $$.dirty = [-1];
+            $$.fragment && $$.fragment.p($$.ctx, dirty);
+            $$.after_update.forEach(add_render_callback);
+        }
+    }
+
+    let promise;
+    function wait() {
+        if (!promise) {
+            promise = Promise.resolve();
+            promise.then(() => {
+                promise = null;
+            });
+        }
+        return promise;
+    }
+    function dispatch(node, direction, kind) {
+        node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
+    const outroing = new Set();
+    let outros;
+    function group_outros() {
+        outros = {
+            r: 0,
+            c: [],
+            p: outros // parent group
+        };
+    }
+    function check_outros() {
+        if (!outros.r) {
+            run_all(outros.c);
+        }
+        outros = outros.p;
+    }
+    function transition_in(block, local) {
+        if (block && block.i) {
+            outroing.delete(block);
+            block.i(local);
+        }
+    }
+    function transition_out(block, local, detach, callback) {
+        if (block && block.o) {
+            if (outroing.has(block))
+                return;
+            outroing.add(block);
+            outros.c.push(() => {
+                outroing.delete(block);
+                if (callback) {
+                    if (detach)
+                        block.d(1);
+                    callback();
+                }
+            });
+            block.o(local);
+        }
+    }
+    const null_transition = { duration: 0 };
+    function create_in_transition(node, fn, params) {
+        let config = fn(node, params);
+        let running = false;
+        let animation_name;
+        let task;
+        let uid = 0;
+        function cleanup() {
+            if (animation_name)
+                delete_rule(node, animation_name);
+        }
+        function go() {
+            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
+            if (css)
+                animation_name = create_rule(node, 0, 1, duration, delay, easing, css, uid++);
+            tick(0, 1);
+            const start_time = now() + delay;
+            const end_time = start_time + duration;
+            if (task)
+                task.abort();
+            running = true;
+            add_render_callback(() => dispatch(node, true, 'start'));
+            task = loop(now => {
+                if (running) {
+                    if (now >= end_time) {
+                        tick(1, 0);
+                        dispatch(node, true, 'end');
+                        cleanup();
+                        return running = false;
+                    }
+                    if (now >= start_time) {
+                        const t = easing((now - start_time) / duration);
+                        tick(t, 1 - t);
+                    }
+                }
+                return running;
+            });
+        }
+        let started = false;
+        return {
+            start() {
+                if (started)
+                    return;
+                started = true;
+                delete_rule(node);
+                if (is_function(config)) {
+                    config = config();
+                    wait().then(go);
+                }
+                else {
+                    go();
+                }
+            },
+            invalidate() {
+                started = false;
+            },
+            end() {
+                if (running) {
+                    cleanup();
+                    running = false;
+                }
+            }
+        };
+    }
+    function mount_component(component, target, anchor, customElement) {
+        const { fragment, on_mount, on_destroy, after_update } = component.$$;
+        fragment && fragment.m(target, anchor);
+        if (!customElement) {
+            // onMount happens before the initial afterUpdate
+            add_render_callback(() => {
+                const new_on_destroy = on_mount.map(run).filter(is_function);
+                if (on_destroy) {
+                    on_destroy.push(...new_on_destroy);
+                }
+                else {
+                    // Edge case - component was destroyed immediately,
+                    // most likely as a result of a binding initialising
+                    run_all(new_on_destroy);
+                }
+                component.$$.on_mount = [];
+            });
+        }
+        after_update.forEach(add_render_callback);
+    }
+    function destroy_component(component, detaching) {
+        const $$ = component.$$;
+        if ($$.fragment !== null) {
+            run_all($$.on_destroy);
+            $$.fragment && $$.fragment.d(detaching);
+            // TODO null out other refs, including component.$$ (but need to
+            // preserve final state?)
+            $$.on_destroy = $$.fragment = null;
+            $$.ctx = [];
+        }
+    }
+    function make_dirty(component, i) {
+        if (component.$$.dirty[0] === -1) {
+            dirty_components.push(component);
+            schedule_update();
+            component.$$.dirty.fill(0);
+        }
+        component.$$.dirty[(i / 31) | 0] |= (1 << (i % 31));
+    }
+    function init(component, options, instance, create_fragment, not_equal, props, append_styles, dirty = [-1]) {
+        const parent_component = current_component;
+        set_current_component(component);
+        const $$ = component.$$ = {
+            fragment: null,
+            ctx: null,
+            // state
+            props,
+            update: noop,
+            not_equal,
+            bound: blank_object(),
+            // lifecycle
+            on_mount: [],
+            on_destroy: [],
+            on_disconnect: [],
+            before_update: [],
+            after_update: [],
+            context: new Map(options.context || (parent_component ? parent_component.$$.context : [])),
+            // everything else
+            callbacks: blank_object(),
+            dirty,
+            skip_bound: false,
+            root: options.target || parent_component.$$.root
+        };
+        append_styles && append_styles($$.root);
+        let ready = false;
+        $$.ctx = instance
+            ? instance(component, options.props || {}, (i, ret, ...rest) => {
+                const value = rest.length ? rest[0] : ret;
+                if ($$.ctx && not_equal($$.ctx[i], $$.ctx[i] = value)) {
+                    if (!$$.skip_bound && $$.bound[i])
+                        $$.bound[i](value);
+                    if (ready)
+                        make_dirty(component, i);
+                }
+                return ret;
+            })
+            : [];
+        $$.update();
+        ready = true;
+        run_all($$.before_update);
+        // `false` as a special case of no DOM component
+        $$.fragment = create_fragment ? create_fragment($$.ctx) : false;
+        if (options.target) {
+            if (options.hydrate) {
+                const nodes = children(options.target);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.l(nodes);
+                nodes.forEach(detach);
+            }
+            else {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                $$.fragment && $$.fragment.c();
+            }
+            if (options.intro)
+                transition_in(component.$$.fragment);
+            mount_component(component, options.target, options.anchor, options.customElement);
+            flush();
+        }
+        set_current_component(parent_component);
+    }
+    /**
+     * Base class for Svelte components. Used when dev=false.
+     */
+    class SvelteComponent {
+        $destroy() {
+            destroy_component(this, 1);
+            this.$destroy = noop;
+        }
+        $on(type, callback) {
+            const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+            callbacks.push(callback);
+            return () => {
+                const index = callbacks.indexOf(callback);
+                if (index !== -1)
+                    callbacks.splice(index, 1);
+            };
+        }
+        $set($$props) {
+            if (this.$$set && !is_empty($$props)) {
+                this.$$.skip_bound = true;
+                this.$$set($$props);
+                this.$$.skip_bound = false;
+            }
+        }
+    }
+
+    function dispatch_dev(type, detail) {
+        document.dispatchEvent(custom_event(type, Object.assign({ version: '3.44.2' }, detail), true));
+    }
+    function append_dev(target, node) {
+        dispatch_dev('SvelteDOMInsert', { target, node });
+        append(target, node);
+    }
+    function insert_dev(target, node, anchor) {
+        dispatch_dev('SvelteDOMInsert', { target, node, anchor });
+        insert(target, node, anchor);
+    }
+    function detach_dev(node) {
+        dispatch_dev('SvelteDOMRemove', { node });
+        detach(node);
+    }
+    function listen_dev(node, event, handler, options, has_prevent_default, has_stop_propagation) {
+        const modifiers = options === true ? ['capture'] : options ? Array.from(Object.keys(options)) : [];
+        if (has_prevent_default)
+            modifiers.push('preventDefault');
+        if (has_stop_propagation)
+            modifiers.push('stopPropagation');
+        dispatch_dev('SvelteDOMAddEventListener', { node, event, handler, modifiers });
+        const dispose = listen(node, event, handler, options);
+        return () => {
+            dispatch_dev('SvelteDOMRemoveEventListener', { node, event, handler, modifiers });
+            dispose();
+        };
+    }
+    function attr_dev(node, attribute, value) {
+        attr(node, attribute, value);
+        if (value == null)
+            dispatch_dev('SvelteDOMRemoveAttribute', { node, attribute });
+        else
+            dispatch_dev('SvelteDOMSetAttribute', { node, attribute, value });
+    }
+    function set_data_dev(text, data) {
+        data = '' + data;
+        if (text.wholeText === data)
+            return;
+        dispatch_dev('SvelteDOMSetData', { node: text, data });
+        text.data = data;
+    }
+    function validate_each_argument(arg) {
+        if (typeof arg !== 'string' && !(arg && typeof arg === 'object' && 'length' in arg)) {
+            let msg = '{#each} only iterates over array-like objects.';
+            if (typeof Symbol === 'function' && arg && Symbol.iterator in arg) {
+                msg += ' You can use a spread to convert this iterable into an array.';
+            }
+            throw new Error(msg);
+        }
+    }
+    function validate_slots(name, slot, keys) {
+        for (const slot_key of Object.keys(slot)) {
+            if (!~keys.indexOf(slot_key)) {
+                console.warn(`<${name}> received an unexpected slot "${slot_key}".`);
+            }
+        }
+    }
+    /**
+     * Base class for Svelte components with some minor dev-enhancements. Used when dev=true.
+     */
+    class SvelteComponentDev extends SvelteComponent {
+        constructor(options) {
+            if (!options || (!options.target && !options.$$inline)) {
+                throw new Error("'target' is a required option");
+            }
+            super();
+        }
+        $destroy() {
+            super.$destroy();
+            this.$destroy = () => {
+                console.warn('Component was already destroyed'); // eslint-disable-line no-console
+            };
+        }
+        $capture_state() { }
+        $inject_state() { }
+    }
+
+    class Clock {
+
+        constructor(hour, minute){
+            if (hour < 0 || 23 < hour) {
+                throw Error("The hour argument must be between 0 and 23");
+            } else {
+                this._hour = hour;
+            }
+            if (minute < 0 || minute > 60) {
+                throw Error("Error: minute value must be >= 0 and < 60")
+            } else {
+                this._minute = minute;
+            }
+        }
+        
+        tick(){
+            this._minute++;
+            if (this._minute == 60) {
+                this._minute = 0;
+                this._hour = (this._hour + 1) % 24; 
+            }   
+        }
+        
+        set alarm(alarm) {
+            this._alarmIsActive = true;
+            this._alarm = alarm;
+        }
+
+        get alarm(){
+            return this._alarm;
+        }
+        deactivateAlarm() {
+            this._alarmIsActive = false;
+        }
+        activateAlarm() {
+            this._alarmIsActive = true;
+        }
+        get isTriggered() {
+            if(this._alarmIsActive){
+                return (this.time.hour.toString().padStart(2, '0') + ':' + this.time.minute.toString().padStart(2, '0')) >= this._alarm
+            }
+        }
+        
+        get time() {
+            return { hour: this._hour, minute: this._minute }
+        }
+    }
+
+    function cubicOut(t) {
+        const f = t - 1.0;
+        return f * f * f + 1.0;
+    }
+
+    function fade(node, { delay = 0, duration = 400, easing = identity } = {}) {
+        const o = +getComputedStyle(node).opacity;
+        return {
+            delay,
+            duration,
+            easing,
+            css: t => `opacity: ${t * o}`
+        };
+    }
+    function fly(node, { delay = 0, duration = 400, easing = cubicOut, x = 0, y = 0, opacity = 0 } = {}) {
+        const style = getComputedStyle(node);
+        const target_opacity = +style.opacity;
+        const transform = style.transform === 'none' ? '' : style.transform;
+        const od = target_opacity * (1 - opacity);
+        return {
+            delay,
+            duration,
+            easing,
+            css: (t, u) => `
+			transform: ${transform} translate(${(1 - t) * x}px, ${(1 - t) * y}px);
+			opacity: ${target_opacity - (od * u)}`
+        };
+    }
+
+    const subscriber_queue = [];
+    /**
+     * Create a `Writable` store that allows both updating and reading by subscription.
+     * @param {*=}value initial value
+     * @param {StartStopNotifier=}start start and stop notifications for subscriptions
+     */
+    function writable(value, start = noop) {
+        let stop;
+        const subscribers = new Set();
+        function set(new_value) {
+            if (safe_not_equal(value, new_value)) {
+                value = new_value;
+                if (stop) { // store is ready
+                    const run_queue = !subscriber_queue.length;
+                    for (const subscriber of subscribers) {
+                        subscriber[1]();
+                        subscriber_queue.push(subscriber, value);
+                    }
+                    if (run_queue) {
+                        for (let i = 0; i < subscriber_queue.length; i += 2) {
+                            subscriber_queue[i][0](subscriber_queue[i + 1]);
+                        }
+                        subscriber_queue.length = 0;
+                    }
+                }
+            }
+        }
+        function update(fn) {
+            set(fn(value));
+        }
+        function subscribe(run, invalidate = noop) {
+            const subscriber = [run, invalidate];
+            subscribers.add(subscriber);
+            if (subscribers.size === 1) {
+                stop = start(set) || noop;
+            }
+            run(value);
+            return () => {
+                subscribers.delete(subscriber);
+                if (subscribers.size === 0) {
+                    stop();
+                    stop = null;
+                }
+            };
+        }
+        return { set, update, subscribe };
+    }
+
+    function is_date(obj) {
+        return Object.prototype.toString.call(obj) === '[object Date]';
+    }
+
+    function tick_spring(ctx, last_value, current_value, target_value) {
+        if (typeof current_value === 'number' || is_date(current_value)) {
+            // @ts-ignore
+            const delta = target_value - current_value;
+            // @ts-ignore
+            const velocity = (current_value - last_value) / (ctx.dt || 1 / 60); // guard div by 0
+            const spring = ctx.opts.stiffness * delta;
+            const damper = ctx.opts.damping * velocity;
+            const acceleration = (spring - damper) * ctx.inv_mass;
+            const d = (velocity + acceleration) * ctx.dt;
+            if (Math.abs(d) < ctx.opts.precision && Math.abs(delta) < ctx.opts.precision) {
+                return target_value; // settled
+            }
+            else {
+                ctx.settled = false; // signal loop to keep ticking
+                // @ts-ignore
+                return is_date(current_value) ?
+                    new Date(current_value.getTime() + d) : current_value + d;
+            }
+        }
+        else if (Array.isArray(current_value)) {
+            // @ts-ignore
+            return current_value.map((_, i) => tick_spring(ctx, last_value[i], current_value[i], target_value[i]));
+        }
+        else if (typeof current_value === 'object') {
+            const next_value = {};
+            for (const k in current_value) {
+                // @ts-ignore
+                next_value[k] = tick_spring(ctx, last_value[k], current_value[k], target_value[k]);
+            }
+            // @ts-ignore
+            return next_value;
+        }
+        else {
+            throw new Error(`Cannot spring ${typeof current_value} values`);
+        }
+    }
+    function spring(value, opts = {}) {
+        const store = writable(value);
+        const { stiffness = 0.15, damping = 0.8, precision = 0.01 } = opts;
+        let last_time;
+        let task;
+        let current_token;
+        let last_value = value;
+        let target_value = value;
+        let inv_mass = 1;
+        let inv_mass_recovery_rate = 0;
+        let cancel_task = false;
+        function set(new_value, opts = {}) {
+            target_value = new_value;
+            const token = current_token = {};
+            if (value == null || opts.hard || (spring.stiffness >= 1 && spring.damping >= 1)) {
+                cancel_task = true; // cancel any running animation
+                last_time = now();
+                last_value = new_value;
+                store.set(value = target_value);
+                return Promise.resolve();
+            }
+            else if (opts.soft) {
+                const rate = opts.soft === true ? .5 : +opts.soft;
+                inv_mass_recovery_rate = 1 / (rate * 60);
+                inv_mass = 0; // infinite mass, unaffected by spring forces
+            }
+            if (!task) {
+                last_time = now();
+                cancel_task = false;
+                task = loop(now => {
+                    if (cancel_task) {
+                        cancel_task = false;
+                        task = null;
+                        return false;
+                    }
+                    inv_mass = Math.min(inv_mass + inv_mass_recovery_rate, 1);
+                    const ctx = {
+                        inv_mass,
+                        opts: spring,
+                        settled: true,
+                        dt: (now - last_time) * 60 / 1000
+                    };
+                    const next_value = tick_spring(ctx, last_value, value, target_value);
+                    last_time = now;
+                    last_value = value;
+                    store.set(value = next_value);
+                    if (ctx.settled) {
+                        task = null;
+                    }
+                    return !ctx.settled;
+                });
+            }
+            return new Promise(fulfil => {
+                task.promise.then(() => {
+                    if (token === current_token)
+                        fulfil();
+                });
+            });
+        }
+        const spring = {
+            set,
+            update: (fn, opts) => set(fn(target_value, value), opts),
+            subscribe: store.subscribe,
+            stiffness,
+            damping,
+            precision
+        };
+        return spring;
+    }
+
+    /* src\App.svelte generated by Svelte v3.44.2 */
+    const file = "src\\App.svelte";
+
+    function get_each_context(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[13] = list[i];
+    	return child_ctx;
+    }
+
+    function get_each_context_1(ctx, list, i) {
+    	const child_ctx = ctx.slice();
+    	child_ctx[16] = list[i];
+    	return child_ctx;
+    }
+
+    // (262:1) {#if clock.isTriggered}
+    function create_if_block_12(ctx) {
+    	let div1;
+    	let div0;
+    	let h2;
+
+    	const block = {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+    			h2 = element("h2");
+    			h2.textContent = "Wake up!!";
+    			attr_dev(h2, "class", "alarmclock svelte-r75pq1");
+    			add_location(h2, file, 264, 5, 4922);
+    			attr_dev(div0, "class", "alarmWakeUp svelte-r75pq1");
+    			add_location(div0, file, 263, 4, 4890);
+    			set_style(div1, "height", "200px");
+    			add_location(div1, file, 262, 3, 4855);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, div1, anchor);
+    			append_dev(div1, div0);
+    			append_dev(div0, h2);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(div1);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_12.name,
+    		type: "if",
+    		source: "(262:1) {#if clock.isTriggered}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (273:7) {#key clock.time.hour}
+    function create_key_block_1(ctx) {
+    	let span;
+    	let t_value = /*clock*/ ctx[0].time.hour.toString().padStart(2, "0") + "";
+    	let t;
+    	let span_intro;
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			t = text(t_value);
+    			set_style(span, "position", "absolute");
+    			set_style(span, "margin", "0");
+    			set_style(span, "top", "0px");
+    			set_style(span, "left", "0");
+    			attr_dev(span, "class", "time svelte-r75pq1");
+    			add_location(span, file, 273, 8, 5166);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*clock*/ 1 && t_value !== (t_value = /*clock*/ ctx[0].time.hour.toString().padStart(2, "0") + "")) set_data_dev(t, t_value);
+    		},
+    		i: function intro(local) {
+    			if (!span_intro) {
+    				add_render_callback(() => {
+    					span_intro = create_in_transition(span, fly, { y: -25 });
+    					span_intro.start();
+    				});
+    			}
+    		},
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_key_block_1.name,
+    		type: "key",
+    		source: "(273:7) {#key clock.time.hour}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (277:7) {#key clock.time.minute}
+    function create_key_block(ctx) {
+    	let span;
+    	let t_value = /*clock*/ ctx[0].time.minute.toString().padStart(2, "0") + "";
+    	let t;
+    	let span_intro;
+
+    	const block = {
+    		c: function create() {
+    			span = element("span");
+    			t = text(t_value);
+    			set_style(span, "position", "absolute");
+    			set_style(span, "margin", "0");
+    			set_style(span, "top", "0");
+    			set_style(span, "right", "5px");
+    			attr_dev(span, "class", "time svelte-r75pq1");
+    			add_location(span, file, 277, 8, 5512);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, span, anchor);
+    			append_dev(span, t);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*clock*/ 1 && t_value !== (t_value = /*clock*/ ctx[0].time.minute.toString().padStart(2, "0") + "")) set_data_dev(t, t_value);
+    		},
+    		i: function intro(local) {
+    			if (!span_intro) {
+    				add_render_callback(() => {
+    					span_intro = create_in_transition(span, fly, { y: -25 });
+    					span_intro.start();
+    				});
+    			}
+    		},
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(span);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_key_block.name,
+    		type: "key",
+    		source: "(277:7) {#key clock.time.minute}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (286:38) 
+    function create_if_block_11(ctx) {
+    	let button;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			button.textContent = "Set Alarm";
+    			attr_dev(button, "class", "setAlarm svelte-r75pq1");
+    			add_location(button, file, 286, 7, 5976);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*activateAlarm*/ ctx[5], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_11.name,
+    		type: "if",
+    		source: "(286:38) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (284:6) {#if clock._alarmIsActive}
+    function create_if_block_10(ctx) {
+    	let button;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			button.textContent = "Disable";
+    			attr_dev(button, "class", "disableAlarm svelte-r75pq1");
+    			add_location(button, file, 284, 7, 5826);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*click_handler*/ ctx[7], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_10.name,
+    		type: "if",
+    		source: "(284:6) {#if clock._alarmIsActive}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (292:56) 
+    function create_if_block_9(ctx) {
+    	let p;
+    	let p_intro;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			p.textContent = "Set alarm to a valid time";
+    			attr_dev(p, "class", "svelte-r75pq1");
+    			add_location(p, file, 292, 7, 6240);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (!p_intro) {
+    				add_render_callback(() => {
+    					p_intro = create_in_transition(p, fade, {});
+    					p_intro.start();
+    				});
+    			}
+    		},
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_9.name,
+    		type: "if",
+    		source: "(292:56) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (290:6) {#if clock._alarmIsActive && !clock.isTriggered}
+    function create_if_block_8(ctx) {
+    	let p;
+    	let t0;
+    	let b;
+    	let t1_value = /*clock*/ ctx[0].alarm + "";
+    	let t1;
+    	let p_intro;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t0 = text("Alarm set to: ");
+    			b = element("b");
+    			t1 = text(t1_value);
+    			attr_dev(b, "class", "svelte-r75pq1");
+    			add_location(b, file, 290, 32, 6149);
+    			attr_dev(p, "class", "svelte-r75pq1");
+    			add_location(p, file, 290, 7, 6124);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t0);
+    			append_dev(p, b);
+    			append_dev(b, t1);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*clock*/ 1 && t1_value !== (t1_value = /*clock*/ ctx[0].alarm + "")) set_data_dev(t1, t1_value);
+    		},
+    		i: function intro(local) {
+    			if (!p_intro) {
+    				add_render_callback(() => {
+    					p_intro = create_in_transition(p, fade, {});
+    					p_intro.start();
+    				});
+    			}
+    		},
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_8.name,
+    		type: "if",
+    		source: "(290:6) {#if clock._alarmIsActive && !clock.isTriggered}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (310:7) {#each [1, 2, 3, 4] as offset}
+    function create_each_block_1(ctx) {
+    	let line;
+
+    	const block = {
+    		c: function create() {
+    			line = svg_element("line");
+    			attr_dev(line, "class", "minor svelte-r75pq1");
+    			attr_dev(line, "y1", "42");
+    			attr_dev(line, "y2", "45");
+    			attr_dev(line, "transform", "rotate(" + 6 * (/*minute*/ ctx[13] + /*offset*/ ctx[16]) + ")");
+    			add_location(line, file, 310, 8, 6830);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, line, anchor);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(line);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block_1.name,
+    		type: "each",
+    		source: "(310:7) {#each [1, 2, 3, 4] as offset}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (303:6) {#each [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] as minute}
+    function create_each_block(ctx) {
+    	let line;
+    	let each_1_anchor;
+    	let each_value_1 = [1, 2, 3, 4];
+    	validate_each_argument(each_value_1);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < 4; i += 1) {
+    		each_blocks[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
+    	}
+
+    	const block = {
+    		c: function create() {
+    			line = svg_element("line");
+
+    			for (let i = 0; i < 4; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			each_1_anchor = empty();
+    			attr_dev(line, "class", "major svelte-r75pq1");
+    			attr_dev(line, "y1", "35");
+    			attr_dev(line, "y2", "45");
+    			attr_dev(line, "transform", "rotate(" + 30 * /*minute*/ ctx[13] + ")");
+    			add_location(line, file, 303, 7, 6665);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, line, anchor);
+
+    			for (let i = 0; i < 4; i += 1) {
+    				each_blocks[i].m(target, anchor);
+    			}
+
+    			insert_dev(target, each_1_anchor, anchor);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(line);
+    			destroy_each(each_blocks, detaching);
+    			if (detaching) detach_dev(each_1_anchor);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_each_block.name,
+    		type: "each",
+    		source: "(303:6) {#each [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55] as minute}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (340:37) 
+    function create_if_block_7(ctx) {
+    	let button;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			button.textContent = "Set Alarm";
+    			attr_dev(button, "class", "setAlarm svelte-r75pq1");
+    			add_location(button, file, 340, 6, 7599);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*activateAlarm*/ ctx[5], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_7.name,
+    		type: "if",
+    		source: "(340:37) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (338:5) {#if clock._alarmIsActive}
+    function create_if_block_6(ctx) {
+    	let button;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			button.textContent = "Disable";
+    			attr_dev(button, "class", "disableAlarm svelte-r75pq1");
+    			add_location(button, file, 338, 6, 7451);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*click_handler_1*/ ctx[9], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_6.name,
+    		type: "if",
+    		source: "(338:5) {#if clock._alarmIsActive}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (346:55) 
+    function create_if_block_5(ctx) {
+    	let p;
+    	let p_intro;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			p.textContent = "Set alarm to a valid time";
+    			attr_dev(p, "class", "svelte-r75pq1");
+    			add_location(p, file, 346, 6, 7856);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (!p_intro) {
+    				add_render_callback(() => {
+    					p_intro = create_in_transition(p, fade, {});
+    					p_intro.start();
+    				});
+    			}
+    		},
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_5.name,
+    		type: "if",
+    		source: "(346:55) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (344:4) {#if clock._alarmIsActive && !clock.isTriggered}
+    function create_if_block_4(ctx) {
+    	let p;
+    	let t0;
+    	let b;
+    	let t1_value = /*clock*/ ctx[0].alarm + "";
+    	let t1;
+    	let p_intro;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t0 = text("Alarm set to: ");
+    			b = element("b");
+    			t1 = text(t1_value);
+    			attr_dev(b, "class", "svelte-r75pq1");
+    			add_location(b, file, 344, 30, 7767);
+    			attr_dev(p, "class", "svelte-r75pq1");
+    			add_location(p, file, 344, 5, 7742);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t0);
+    			append_dev(p, b);
+    			append_dev(b, t1);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*clock*/ 1 && t1_value !== (t1_value = /*clock*/ ctx[0].alarm + "")) set_data_dev(t1, t1_value);
+    		},
+    		i: function intro(local) {
+    			if (!p_intro) {
+    				add_render_callback(() => {
+    					p_intro = create_in_transition(p, fade, {});
+    					p_intro.start();
+    				});
+    			}
+    		},
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_4.name,
+    		type: "if",
+    		source: "(344:4) {#if clock._alarmIsActive && !clock.isTriggered}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (370:35) 
+    function create_if_block_3(ctx) {
+    	let button;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			button.textContent = "Set Alarm";
+    			attr_dev(button, "class", "setAlarm svelte-r75pq1");
+    			add_location(button, file, 370, 4, 9210);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*activateAlarm*/ ctx[5], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_3.name,
+    		type: "if",
+    		source: "(370:35) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (368:3) {#if clock._alarmIsActive}
+    function create_if_block_2(ctx) {
+    	let button;
+    	let mounted;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			button = element("button");
+    			button.textContent = "Disable";
+    			attr_dev(button, "class", "disableAlarm svelte-r75pq1");
+    			add_location(button, file, 368, 4, 9066);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, button, anchor);
+
+    			if (!mounted) {
+    				dispose = listen_dev(button, "click", /*click_handler_2*/ ctx[11], false, false, false);
+    				mounted = true;
+    			}
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(button);
+    			mounted = false;
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_2.name,
+    		type: "if",
+    		source: "(368:3) {#if clock._alarmIsActive}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (376:53) 
+    function create_if_block_1(ctx) {
+    	let p;
+    	let p_intro;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			p.textContent = "Set alarm to a valid time";
+    			attr_dev(p, "class", "svelte-r75pq1");
+    			add_location(p, file, 376, 4, 9459);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (!p_intro) {
+    				add_render_callback(() => {
+    					p_intro = create_in_transition(p, fade, {});
+    					p_intro.start();
+    				});
+    			}
+    		},
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block_1.name,
+    		type: "if",
+    		source: "(376:53) ",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    // (374:3) {#if clock._alarmIsActive && !clock.isTriggered}
+    function create_if_block(ctx) {
+    	let p;
+    	let t0;
+    	let b;
+    	let t1_value = /*clock*/ ctx[0].alarm + "";
+    	let t1;
+    	let p_intro;
+
+    	const block = {
+    		c: function create() {
+    			p = element("p");
+    			t0 = text("Alarm set to: ");
+    			b = element("b");
+    			t1 = text(t1_value);
+    			attr_dev(b, "class", "svelte-r75pq1");
+    			add_location(b, file, 374, 29, 9374);
+    			attr_dev(p, "class", "svelte-r75pq1");
+    			add_location(p, file, 374, 4, 9349);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, p, anchor);
+    			append_dev(p, t0);
+    			append_dev(p, b);
+    			append_dev(b, t1);
+    		},
+    		p: function update(ctx, dirty) {
+    			if (dirty & /*clock*/ 1 && t1_value !== (t1_value = /*clock*/ ctx[0].alarm + "")) set_data_dev(t1, t1_value);
+    		},
+    		i: function intro(local) {
+    			if (!p_intro) {
+    				add_render_callback(() => {
+    					p_intro = create_in_transition(p, fade, {});
+    					p_intro.start();
+    				});
+    			}
+    		},
+    		o: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(p);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_if_block.name,
+    		type: "if",
+    		source: "(374:3) {#if clock._alarmIsActive && !clock.isTriggered}",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment(ctx) {
+    	let link0;
+    	let t0;
+    	let link1;
+    	let t1;
+    	let link2;
+    	let t2;
+    	let main;
+    	let h1;
+    	let t4;
+    	let t5;
+    	let div12;
+    	let div3;
+    	let div1;
+    	let div0;
+    	let previous_key = /*clock*/ ctx[0].time.hour;
+    	let t6;
+    	let span;
+    	let t8;
+    	let previous_key_1 = /*clock*/ ctx[0].time.minute;
+    	let t9;
+    	let div2;
+    	let input0;
+    	let t10;
+    	let t11;
+    	let t12;
+    	let div6;
+    	let div4;
+    	let svg0;
+    	let circle;
+    	let line0;
+    	let line0_transform_value;
+    	let line1;
+    	let line1_transform_value;
+    	let t13;
+    	let div5;
+    	let input1;
+    	let t14;
+    	let t15;
+    	let t16;
+    	let div11;
+    	let div9;
+    	let div7;
+    	let svg1;
+    	let rect0;
+    	let rect0_y_value;
+    	let text0;
+    	let t17_value = /*clock*/ ctx[0].time.hour.toString().padStart(2, "0") + "";
+    	let t17;
+    	let t18;
+    	let div8;
+    	let svg2;
+    	let rect1;
+    	let rect1_y_value;
+    	let text1;
+    	let t19_value = /*clock*/ ctx[0].time.minute.toString().padStart(2, "0") + "";
+    	let t19;
+    	let t20;
+    	let div10;
+    	let input2;
+    	let t21;
+    	let t22;
+    	let mounted;
+    	let dispose;
+    	let if_block0 = /*clock*/ ctx[0].isTriggered && create_if_block_12(ctx);
+    	let key_block0 = create_key_block_1(ctx);
+    	let key_block1 = create_key_block(ctx);
+
+    	function select_block_type(ctx, dirty) {
+    		if (/*clock*/ ctx[0]._alarmIsActive) return create_if_block_10;
+    		if (!/*clock*/ ctx[0]._alarmIsActive) return create_if_block_11;
+    	}
+
+    	let current_block_type = select_block_type(ctx);
+    	let if_block1 = current_block_type && current_block_type(ctx);
+
+    	function select_block_type_1(ctx, dirty) {
+    		if (/*clock*/ ctx[0]._alarmIsActive && !/*clock*/ ctx[0].isTriggered) return create_if_block_8;
+    		if (/*alarmNotDefined*/ ctx[2] && !/*clock*/ ctx[0].isTriggered) return create_if_block_9;
+    	}
+
+    	let current_block_type_1 = select_block_type_1(ctx);
+    	let if_block2 = current_block_type_1 && current_block_type_1(ctx);
+    	let each_value = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+    	validate_each_argument(each_value);
+    	let each_blocks = [];
+
+    	for (let i = 0; i < 12; i += 1) {
+    		each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
+    	}
+
+    	function select_block_type_2(ctx, dirty) {
+    		if (/*clock*/ ctx[0]._alarmIsActive) return create_if_block_6;
+    		if (!/*clock*/ ctx[0]._alarmIsActive) return create_if_block_7;
+    	}
+
+    	let current_block_type_2 = select_block_type_2(ctx);
+    	let if_block3 = current_block_type_2 && current_block_type_2(ctx);
+
+    	function select_block_type_3(ctx, dirty) {
+    		if (/*clock*/ ctx[0]._alarmIsActive && !/*clock*/ ctx[0].isTriggered) return create_if_block_4;
+    		if (/*alarmNotDefined*/ ctx[2] && !/*clock*/ ctx[0].isTriggered) return create_if_block_5;
+    	}
+
+    	let current_block_type_3 = select_block_type_3(ctx);
+    	let if_block4 = current_block_type_3 && current_block_type_3(ctx);
+
+    	function select_block_type_4(ctx, dirty) {
+    		if (/*clock*/ ctx[0]._alarmIsActive) return create_if_block_2;
+    		if (!/*clock*/ ctx[0]._alarmIsActive) return create_if_block_3;
+    	}
+
+    	let current_block_type_4 = select_block_type_4(ctx);
+    	let if_block5 = current_block_type_4 && current_block_type_4(ctx);
+
+    	function select_block_type_5(ctx, dirty) {
+    		if (/*clock*/ ctx[0]._alarmIsActive && !/*clock*/ ctx[0].isTriggered) return create_if_block;
+    		if (/*alarmNotDefined*/ ctx[2] && !/*clock*/ ctx[0].isTriggered) return create_if_block_1;
+    	}
+
+    	let current_block_type_5 = select_block_type_5(ctx);
+    	let if_block6 = current_block_type_5 && current_block_type_5(ctx);
+
+    	const block = {
+    		c: function create() {
+    			link0 = element("link");
+    			t0 = space();
+    			link1 = element("link");
+    			t1 = space();
+    			link2 = element("link");
+    			t2 = space();
+    			main = element("main");
+    			h1 = element("h1");
+    			h1.textContent = "Clock Viewer";
+    			t4 = space();
+    			if (if_block0) if_block0.c();
+    			t5 = space();
+    			div12 = element("div");
+    			div3 = element("div");
+    			div1 = element("div");
+    			div0 = element("div");
+    			key_block0.c();
+    			t6 = space();
+    			span = element("span");
+    			span.textContent = ":";
+    			t8 = space();
+    			key_block1.c();
+    			t9 = space();
+    			div2 = element("div");
+    			input0 = element("input");
+    			t10 = space();
+    			if (if_block1) if_block1.c();
+    			t11 = space();
+    			if (if_block2) if_block2.c();
+    			t12 = space();
+    			div6 = element("div");
+    			div4 = element("div");
+    			svg0 = svg_element("svg");
+    			circle = svg_element("circle");
+
+    			for (let i = 0; i < 12; i += 1) {
+    				each_blocks[i].c();
+    			}
+
+    			line0 = svg_element("line");
+    			line1 = svg_element("line");
+    			t13 = space();
+    			div5 = element("div");
+    			input1 = element("input");
+    			t14 = space();
+    			if (if_block3) if_block3.c();
+    			t15 = space();
+    			if (if_block4) if_block4.c();
+    			t16 = space();
+    			div11 = element("div");
+    			div9 = element("div");
+    			div7 = element("div");
+    			svg1 = svg_element("svg");
+    			rect0 = svg_element("rect");
+    			text0 = svg_element("text");
+    			t17 = text(t17_value);
+    			t18 = space();
+    			div8 = element("div");
+    			svg2 = svg_element("svg");
+    			rect1 = svg_element("rect");
+    			text1 = svg_element("text");
+    			t19 = text(t19_value);
+    			t20 = space();
+    			div10 = element("div");
+    			input2 = element("input");
+    			t21 = space();
+    			if (if_block5) if_block5.c();
+    			t22 = space();
+    			if (if_block6) if_block6.c();
+    			attr_dev(link0, "rel", "preconnect");
+    			attr_dev(link0, "href", "https://fonts.googleapis.com");
+    			add_location(link0, file, 0, 0, 0);
+    			attr_dev(link1, "rel", "preconnect");
+    			attr_dev(link1, "href", "https://fonts.gstatic.com");
+    			attr_dev(link1, "crossorigin", "");
+    			add_location(link1, file, 1, 0, 61);
+    			attr_dev(link2, "href", "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,300&family=Roboto+Mono:wght@400;700&display=swap");
+    			attr_dev(link2, "rel", "stylesheet");
+    			add_location(link2, file, 2, 0, 131);
+    			add_location(h1, file, 260, 1, 4803);
+    			set_style(span, "font-size", "3em");
+    			set_style(span, "position", "absolute");
+    			set_style(span, "margin", "0");
+    			set_style(span, "top", "-6px");
+    			set_style(span, "left", "80px");
+    			set_style(span, "display", "inline-block");
+    			set_style(span, "height", "5px");
+    			add_location(span, file, 275, 8, 5342);
+    			attr_dev(div0, "id", "digitalClock");
+    			attr_dev(div0, "class", "svelte-r75pq1");
+    			add_location(div0, file, 271, 6, 5102);
+    			set_style(div1, "position", "relative");
+    			set_style(div1, "height", "200px");
+    			add_location(div1, file, 270, 5, 5047);
+    			attr_dev(input0, "type", "time");
+    			attr_dev(input0, "class", "svelte-r75pq1");
+    			add_location(input0, file, 282, 6, 5742);
+    			attr_dev(div2, "class", "item");
+    			add_location(div2, file, 281, 5, 5716);
+    			attr_dev(div3, "class", "clock svelte-r75pq1");
+    			add_location(div3, file, 269, 2, 5021);
+    			attr_dev(circle, "class", "clock-face svelte-r75pq1");
+    			attr_dev(circle, "r", "48");
+    			add_location(circle, file, 300, 6, 6525);
+    			attr_dev(line0, "class", "hour svelte-r75pq1");
+    			attr_dev(line0, "y1", "2");
+    			attr_dev(line0, "y2", "-20");
+    			attr_dev(line0, "transform", line0_transform_value = "rotate(" + 0.5 * /*$minuteClock*/ ctx[3] + ")");
+    			add_location(line0, file, 319, 6, 7026);
+    			attr_dev(line1, "class", "minute svelte-r75pq1");
+    			attr_dev(line1, "y1", "4");
+    			attr_dev(line1, "y2", "-30");
+    			attr_dev(line1, "transform", line1_transform_value = "rotate(" + 6 * /*$minuteClock*/ ctx[3] + ")");
+    			add_location(line1, file, 327, 6, 7186);
+    			attr_dev(svg0, "viewBox", "-50 -50 100 100");
+    			set_style(svg0, "width", "70%");
+    			set_style(svg0, "height", "100%");
+    			attr_dev(svg0, "class", "svelte-r75pq1");
+    			add_location(svg0, file, 299, 5, 6454);
+    			attr_dev(div4, "class", "item");
+    			set_style(div4, "height", "200px");
+    			add_location(div4, file, 298, 4, 6406);
+    			attr_dev(input1, "type", "time");
+    			attr_dev(input1, "class", "svelte-r75pq1");
+    			add_location(input1, file, 336, 5, 7372);
+    			set_style(div5, "margin-top", "5px");
+    			add_location(div5, file, 335, 4, 7335);
+    			attr_dev(div6, "class", "clock svelte-r75pq1");
+    			add_location(div6, file, 296, 2, 6321);
+    			attr_dev(rect0, "x", "0");
+    			attr_dev(rect0, "y", rect0_y_value = 198 - /*clock*/ ctx[0].time.hour * 8.53);
+    			attr_dev(rect0, "width", "100%");
+    			attr_dev(rect0, "height", "200");
+    			set_style(rect0, "fill", "rgb(0,0,255)");
+    			set_style(rect0, "stroke", "rgb(0,0,0)");
+    			add_location(rect0, file, 354, 6, 8200);
+    			attr_dev(text0, "class", "tttt svelte-r75pq1");
+    			attr_dev(text0, "x", "50%");
+    			attr_dev(text0, "y", "50%");
+    			attr_dev(text0, "dominant-baseline", "middle");
+    			attr_dev(text0, "text-anchor", "middle");
+    			add_location(text0, file, 355, 6, 8329);
+    			attr_dev(svg1, "width", "80");
+    			attr_dev(svg1, "height", "200");
+    			set_style(svg1, "width", "80%");
+    			set_style(svg1, "border", "3px solid green");
+    			attr_dev(svg1, "class", "svelte-r75pq1");
+    			add_location(svg1, file, 353, 5, 8118);
+    			attr_dev(div7, "class", "hourMeter");
+    			set_style(div7, "width", "50%");
+    			set_style(div7, "height", "100%");
+    			add_location(div7, file, 352, 4, 8055);
+    			attr_dev(rect1, "x", "0");
+    			attr_dev(rect1, "y", rect1_y_value = 198 - /*clock*/ ctx[0].time.minute * 3.33);
+    			attr_dev(rect1, "width", "100%");
+    			attr_dev(rect1, "height", "200");
+    			set_style(rect1, "fill", "rgb(0,0,255)");
+    			set_style(rect1, "stroke", "rgb(0,0,0)");
+    			add_location(rect1, file, 361, 6, 8653);
+    			attr_dev(text1, "class", "tttt svelte-r75pq1");
+    			attr_dev(text1, "x", "50%");
+    			attr_dev(text1, "y", "50%");
+    			attr_dev(text1, "dominant-baseline", "middle");
+    			attr_dev(text1, "text-anchor", "middle");
+    			add_location(text1, file, 362, 6, 8783);
+    			attr_dev(svg2, "width", "80");
+    			attr_dev(svg2, "height", "200");
+    			set_style(svg2, "width", "80%");
+    			set_style(svg2, "border", "3px solid green");
+    			attr_dev(svg2, "class", "svelte-r75pq1");
+    			add_location(svg2, file, 359, 5, 8561);
+    			attr_dev(div8, "class", "minuteMeter");
+    			set_style(div8, "width", "50%");
+    			set_style(div8, "height", "100%");
+    			add_location(div8, file, 358, 4, 8496);
+    			set_style(div9, "height", "auto");
+    			set_style(div9, "display", "flex");
+    			set_style(div9, "justify-content", "space-around");
+    			set_style(div9, "text-align", "center");
+    			add_location(div9, file, 351, 3, 7957);
+    			attr_dev(input2, "type", "time");
+    			attr_dev(input2, "class", "svelte-r75pq1");
+    			add_location(input2, file, 366, 4, 8991);
+    			set_style(div10, "margin-top", "5px");
+    			add_location(div10, file, 365, 3, 8955);
+    			attr_dev(div11, "class", "clock svelte-r75pq1");
+    			add_location(div11, file, 350, 2, 7933);
+    			attr_dev(div12, "class", "container svelte-r75pq1");
+    			add_location(div12, file, 268, 1, 4994);
+    			attr_dev(main, "class", "svelte-r75pq1");
+    			add_location(main, file, 259, 0, 4794);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, link0, anchor);
+    			insert_dev(target, t0, anchor);
+    			insert_dev(target, link1, anchor);
+    			insert_dev(target, t1, anchor);
+    			insert_dev(target, link2, anchor);
+    			insert_dev(target, t2, anchor);
+    			insert_dev(target, main, anchor);
+    			append_dev(main, h1);
+    			append_dev(main, t4);
+    			if (if_block0) if_block0.m(main, null);
+    			append_dev(main, t5);
+    			append_dev(main, div12);
+    			append_dev(div12, div3);
+    			append_dev(div3, div1);
+    			append_dev(div1, div0);
+    			key_block0.m(div0, null);
+    			append_dev(div0, t6);
+    			append_dev(div0, span);
+    			append_dev(div0, t8);
+    			key_block1.m(div0, null);
+    			append_dev(div3, t9);
+    			append_dev(div3, div2);
+    			append_dev(div2, input0);
+    			set_input_value(input0, /*alarm*/ ctx[1]);
+    			append_dev(div2, t10);
+    			if (if_block1) if_block1.m(div2, null);
+    			append_dev(div2, t11);
+    			if (if_block2) if_block2.m(div2, null);
+    			append_dev(div12, t12);
+    			append_dev(div12, div6);
+    			append_dev(div6, div4);
+    			append_dev(div4, svg0);
+    			append_dev(svg0, circle);
+
+    			for (let i = 0; i < 12; i += 1) {
+    				each_blocks[i].m(svg0, null);
+    			}
+
+    			append_dev(svg0, line0);
+    			append_dev(svg0, line1);
+    			append_dev(div6, t13);
+    			append_dev(div6, div5);
+    			append_dev(div5, input1);
+    			set_input_value(input1, /*alarm*/ ctx[1]);
+    			append_dev(div5, t14);
+    			if (if_block3) if_block3.m(div5, null);
+    			append_dev(div5, t15);
+    			if (if_block4) if_block4.m(div5, null);
+    			append_dev(div12, t16);
+    			append_dev(div12, div11);
+    			append_dev(div11, div9);
+    			append_dev(div9, div7);
+    			append_dev(div7, svg1);
+    			append_dev(svg1, rect0);
+    			append_dev(svg1, text0);
+    			append_dev(text0, t17);
+    			append_dev(div9, t18);
+    			append_dev(div9, div8);
+    			append_dev(div8, svg2);
+    			append_dev(svg2, rect1);
+    			append_dev(svg2, text1);
+    			append_dev(text1, t19);
+    			append_dev(div11, t20);
+    			append_dev(div11, div10);
+    			append_dev(div10, input2);
+    			set_input_value(input2, /*alarm*/ ctx[1]);
+    			append_dev(div10, t21);
+    			if (if_block5) if_block5.m(div10, null);
+    			append_dev(div10, t22);
+    			if (if_block6) if_block6.m(div10, null);
+
+    			if (!mounted) {
+    				dispose = [
+    					listen_dev(input0, "input", /*input0_input_handler*/ ctx[6]),
+    					listen_dev(input1, "input", /*input1_input_handler*/ ctx[8]),
+    					listen_dev(input2, "input", /*input2_input_handler*/ ctx[10])
+    				];
+
+    				mounted = true;
+    			}
+    		},
+    		p: function update(ctx, [dirty]) {
+    			if (/*clock*/ ctx[0].isTriggered) {
+    				if (if_block0) ; else {
+    					if_block0 = create_if_block_12(ctx);
+    					if_block0.c();
+    					if_block0.m(main, t5);
+    				}
+    			} else if (if_block0) {
+    				if_block0.d(1);
+    				if_block0 = null;
+    			}
+
+    			if (dirty & /*clock*/ 1 && safe_not_equal(previous_key, previous_key = /*clock*/ ctx[0].time.hour)) {
+    				group_outros();
+    				transition_out(key_block0, 1, 1, noop);
+    				check_outros();
+    				key_block0 = create_key_block_1(ctx);
+    				key_block0.c();
+    				transition_in(key_block0);
+    				key_block0.m(div0, t6);
+    			} else {
+    				key_block0.p(ctx, dirty);
+    			}
+
+    			if (dirty & /*clock*/ 1 && safe_not_equal(previous_key_1, previous_key_1 = /*clock*/ ctx[0].time.minute)) {
+    				group_outros();
+    				transition_out(key_block1, 1, 1, noop);
+    				check_outros();
+    				key_block1 = create_key_block(ctx);
+    				key_block1.c();
+    				transition_in(key_block1);
+    				key_block1.m(div0, null);
+    			} else {
+    				key_block1.p(ctx, dirty);
+    			}
+
+    			if (dirty & /*alarm*/ 2) {
+    				set_input_value(input0, /*alarm*/ ctx[1]);
+    			}
+
+    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block1) {
+    				if_block1.p(ctx, dirty);
+    			} else {
+    				if (if_block1) if_block1.d(1);
+    				if_block1 = current_block_type && current_block_type(ctx);
+
+    				if (if_block1) {
+    					if_block1.c();
+    					if_block1.m(div2, t11);
+    				}
+    			}
+
+    			if (current_block_type_1 === (current_block_type_1 = select_block_type_1(ctx)) && if_block2) {
+    				if_block2.p(ctx, dirty);
+    			} else {
+    				if (if_block2) if_block2.d(1);
+    				if_block2 = current_block_type_1 && current_block_type_1(ctx);
+
+    				if (if_block2) {
+    					if_block2.c();
+    					transition_in(if_block2, 1);
+    					if_block2.m(div2, null);
+    				}
+    			}
+
+    			if (dirty & /*$minuteClock*/ 8 && line0_transform_value !== (line0_transform_value = "rotate(" + 0.5 * /*$minuteClock*/ ctx[3] + ")")) {
+    				attr_dev(line0, "transform", line0_transform_value);
+    			}
+
+    			if (dirty & /*$minuteClock*/ 8 && line1_transform_value !== (line1_transform_value = "rotate(" + 6 * /*$minuteClock*/ ctx[3] + ")")) {
+    				attr_dev(line1, "transform", line1_transform_value);
+    			}
+
+    			if (dirty & /*alarm*/ 2) {
+    				set_input_value(input1, /*alarm*/ ctx[1]);
+    			}
+
+    			if (current_block_type_2 === (current_block_type_2 = select_block_type_2(ctx)) && if_block3) {
+    				if_block3.p(ctx, dirty);
+    			} else {
+    				if (if_block3) if_block3.d(1);
+    				if_block3 = current_block_type_2 && current_block_type_2(ctx);
+
+    				if (if_block3) {
+    					if_block3.c();
+    					if_block3.m(div5, t15);
+    				}
+    			}
+
+    			if (current_block_type_3 === (current_block_type_3 = select_block_type_3(ctx)) && if_block4) {
+    				if_block4.p(ctx, dirty);
+    			} else {
+    				if (if_block4) if_block4.d(1);
+    				if_block4 = current_block_type_3 && current_block_type_3(ctx);
+
+    				if (if_block4) {
+    					if_block4.c();
+    					transition_in(if_block4, 1);
+    					if_block4.m(div5, null);
+    				}
+    			}
+
+    			if (dirty & /*clock*/ 1 && rect0_y_value !== (rect0_y_value = 198 - /*clock*/ ctx[0].time.hour * 8.53)) {
+    				attr_dev(rect0, "y", rect0_y_value);
+    			}
+
+    			if (dirty & /*clock*/ 1 && t17_value !== (t17_value = /*clock*/ ctx[0].time.hour.toString().padStart(2, "0") + "")) set_data_dev(t17, t17_value);
+
+    			if (dirty & /*clock*/ 1 && rect1_y_value !== (rect1_y_value = 198 - /*clock*/ ctx[0].time.minute * 3.33)) {
+    				attr_dev(rect1, "y", rect1_y_value);
+    			}
+
+    			if (dirty & /*clock*/ 1 && t19_value !== (t19_value = /*clock*/ ctx[0].time.minute.toString().padStart(2, "0") + "")) set_data_dev(t19, t19_value);
+
+    			if (dirty & /*alarm*/ 2) {
+    				set_input_value(input2, /*alarm*/ ctx[1]);
+    			}
+
+    			if (current_block_type_4 === (current_block_type_4 = select_block_type_4(ctx)) && if_block5) {
+    				if_block5.p(ctx, dirty);
+    			} else {
+    				if (if_block5) if_block5.d(1);
+    				if_block5 = current_block_type_4 && current_block_type_4(ctx);
+
+    				if (if_block5) {
+    					if_block5.c();
+    					if_block5.m(div10, t22);
+    				}
+    			}
+
+    			if (current_block_type_5 === (current_block_type_5 = select_block_type_5(ctx)) && if_block6) {
+    				if_block6.p(ctx, dirty);
+    			} else {
+    				if (if_block6) if_block6.d(1);
+    				if_block6 = current_block_type_5 && current_block_type_5(ctx);
+
+    				if (if_block6) {
+    					if_block6.c();
+    					transition_in(if_block6, 1);
+    					if_block6.m(div10, null);
+    				}
+    			}
+    		},
+    		i: function intro(local) {
+    			transition_in(key_block0);
+    			transition_in(key_block1);
+    			transition_in(if_block2);
+    			transition_in(if_block4);
+    			transition_in(if_block6);
+    		},
+    		o: function outro(local) {
+    			transition_out(key_block0);
+    			transition_out(key_block1);
+    		},
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(link0);
+    			if (detaching) detach_dev(t0);
+    			if (detaching) detach_dev(link1);
+    			if (detaching) detach_dev(t1);
+    			if (detaching) detach_dev(link2);
+    			if (detaching) detach_dev(t2);
+    			if (detaching) detach_dev(main);
+    			if (if_block0) if_block0.d();
+    			key_block0.d(detaching);
+    			key_block1.d(detaching);
+
+    			if (if_block1) {
+    				if_block1.d();
+    			}
+
+    			if (if_block2) {
+    				if_block2.d();
+    			}
+
+    			destroy_each(each_blocks, detaching);
+
+    			if (if_block3) {
+    				if_block3.d();
+    			}
+
+    			if (if_block4) {
+    				if_block4.d();
+    			}
+
+    			if (if_block5) {
+    				if_block5.d();
+    			}
+
+    			if (if_block6) {
+    				if_block6.d();
+    			}
+
+    			mounted = false;
+    			run_all(dispose);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function instance($$self, $$props, $$invalidate) {
+    	let $minuteClock;
+    	let { $$slots: slots = {}, $$scope } = $$props;
+    	validate_slots('App', slots, []);
+    	let clock = new Clock(23, 37);
+    	let alarm;
+    	let alarmNotDefined = false;
+    	let minuteClock = spring(parseInt(clock.time.hour) * 60 + parseInt(clock.time.minute));
+    	validate_store(minuteClock, 'minuteClock');
+    	component_subscribe($$self, minuteClock, value => $$invalidate(3, $minuteClock = value));
+
+    	function tick() {
+    		clock.tick();
+    		minuteClock.set(parseInt(clock.time.hour) * 60 + parseInt(clock.time.minute));
+    		$$invalidate(0, clock);
+    	}
+
+    	setInterval(tick, 1000);
+
+    	function activateAlarm() {
+    		if (alarm) {
+    			$$invalidate(0, clock.alarm = alarm, clock);
+    			$$invalidate(2, alarmNotDefined = false);
+    		} else {
+    			$$invalidate(2, alarmNotDefined = true);
+    		}
+    	}
+
+    	const writable_props = [];
+
+    	Object.keys($$props).forEach(key => {
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== '$$' && key !== 'slot') console.warn(`<App> was created with unknown prop '${key}'`);
+    	});
+
+    	function input0_input_handler() {
+    		alarm = this.value;
+    		$$invalidate(1, alarm);
+    	}
+
+    	const click_handler = () => {
+    		clock.deactivateAlarm();
+    		$$invalidate(1, alarm = "");
+    	};
+
+    	function input1_input_handler() {
+    		alarm = this.value;
+    		$$invalidate(1, alarm);
+    	}
+
+    	const click_handler_1 = () => {
+    		clock.deactivateAlarm();
+    		$$invalidate(1, alarm = "");
+    	};
+
+    	function input2_input_handler() {
+    		alarm = this.value;
+    		$$invalidate(1, alarm);
+    	}
+
+    	const click_handler_2 = () => {
+    		clock.deactivateAlarm();
+    		$$invalidate(1, alarm = "");
+    	};
+
+    	$$self.$capture_state = () => ({
+    		Clock,
+    		fly,
+    		fade,
+    		spring,
+    		clock,
+    		alarm,
+    		alarmNotDefined,
+    		minuteClock,
+    		tick,
+    		activateAlarm,
+    		$minuteClock
+    	});
+
+    	$$self.$inject_state = $$props => {
+    		if ('clock' in $$props) $$invalidate(0, clock = $$props.clock);
+    		if ('alarm' in $$props) $$invalidate(1, alarm = $$props.alarm);
+    		if ('alarmNotDefined' in $$props) $$invalidate(2, alarmNotDefined = $$props.alarmNotDefined);
+    		if ('minuteClock' in $$props) $$invalidate(4, minuteClock = $$props.minuteClock);
+    	};
+
+    	if ($$props && "$$inject" in $$props) {
+    		$$self.$inject_state($$props.$$inject);
+    	}
+
+    	return [
+    		clock,
+    		alarm,
+    		alarmNotDefined,
+    		$minuteClock,
+    		minuteClock,
+    		activateAlarm,
+    		input0_input_handler,
+    		click_handler,
+    		input1_input_handler,
+    		click_handler_1,
+    		input2_input_handler,
+    		click_handler_2
+    	];
+    }
+
+    class App extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance, create_fragment, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "App",
+    			options,
+    			id: create_fragment.name
+    		});
+    	}
+    }
+
+    const app = new App({
+    	target: document.body,
+    });
+
+    return app;
+
+})();
 //# sourceMappingURL=bundle.js.map
