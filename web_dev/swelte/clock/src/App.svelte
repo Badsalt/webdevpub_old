@@ -38,7 +38,7 @@
 	:global(body){
 		background-size: 400% 400% !important;
 		background-color: rgb(215,255,0);
-background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(151, 177, 33) 25%, rgba(87,255,0,1) 45%, rgb(255, 136, 38) 71%, rgb(50,234,62) 90%);
+background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(151, 177, 33) 25%, rgba(87,255,0,1) 45%, rgba(255, 197, 38, 0.76) 71%, rgb(50,234,62) 90%);
 		animation: gradient 30s ease infinite;
 		font-family: 'Roboto Mono', monospace;		
 	}
@@ -257,7 +257,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 <main>
 	<h1>Clock Viewer</h1>
 	{#if clock.isTriggered}
-			<div in:fly={{y: -50, duration: 2000}} out:fly={{y: -50, duration: 2000}}  style="height: 200px; background-color: white;">	
+			<div style="height: 200px;">	
 				<div class="alarmWakeUp">
 					<h2 class="alarmclock">Wake up!!</h2>
 				</div>
@@ -346,7 +346,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 				</div>
 		</div>
 		<div class="clock">
-			<div style="height: auto; display:flex; justify-content: space-around; text-align: center;">
+			<div style="height: auto; display:flex; justify-content: space-around; text-align: center; margin-top: 10px; margin-left: 10px; margin-right: 10px;">
 				<div class="hourMeter" style="width: 50%; height: 100%">
 					<svg width="80" height="200" style="width: 80%; border: 3px solid green;">
 						<rect x= "0" y= "{198 - clock.time.hour * 8.53}" width="100%" height="200" style="fill:rgb(0,0,255);stroke:rgb(0,0,0)" />

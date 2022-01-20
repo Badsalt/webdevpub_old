@@ -394,62 +394,6 @@ var app = (function () {
             }
         };
     }
-    function create_out_transition(node, fn, params) {
-        let config = fn(node, params);
-        let running = true;
-        let animation_name;
-        const group = outros;
-        group.r += 1;
-        function go() {
-            const { delay = 0, duration = 300, easing = identity, tick = noop, css } = config || null_transition;
-            if (css)
-                animation_name = create_rule(node, 1, 0, duration, delay, easing, css);
-            const start_time = now() + delay;
-            const end_time = start_time + duration;
-            add_render_callback(() => dispatch(node, false, 'start'));
-            loop(now => {
-                if (running) {
-                    if (now >= end_time) {
-                        tick(0, 1);
-                        dispatch(node, false, 'end');
-                        if (!--group.r) {
-                            // this will result in `end()` being called,
-                            // so we don't need to clean up here
-                            run_all(group.c);
-                        }
-                        return false;
-                    }
-                    if (now >= start_time) {
-                        const t = easing((now - start_time) / duration);
-                        tick(1 - t, t);
-                    }
-                }
-                return running;
-            });
-        }
-        if (is_function(config)) {
-            wait().then(() => {
-                // @ts-ignore
-                config = config();
-                go();
-            });
-        }
-        else {
-            go();
-        }
-        return {
-            end(reset) {
-                if (reset && config.tick) {
-                    config.tick(1, 0);
-                }
-                if (running) {
-                    if (animation_name)
-                        delete_rule(node, animation_name);
-                    running = false;
-                }
-            }
-        };
-    }
     function mount_component(component, target, anchor, customElement) {
         const { fragment, on_mount, on_destroy, after_update } = component.$$;
         fragment && fragment.m(target, anchor);
@@ -910,9 +854,6 @@ var app = (function () {
     	let div1;
     	let div0;
     	let h2;
-    	let div1_intro;
-    	let div1_outro;
-    	let current;
 
     	const block = {
     		c: function create() {
@@ -920,39 +861,20 @@ var app = (function () {
     			div0 = element("div");
     			h2 = element("h2");
     			h2.textContent = "Wake up!!";
-    			attr_dev(h2, "class", "alarmclock svelte-13vrey0");
-    			add_location(h2, file, 261, 5, 5017);
-    			attr_dev(div0, "class", "alarmWakeUp svelte-13vrey0");
-    			add_location(div0, file, 260, 4, 4985);
+    			attr_dev(h2, "class", "alarmclock svelte-1w0qx03");
+    			add_location(h2, file, 261, 5, 4929);
+    			attr_dev(div0, "class", "alarmWakeUp svelte-1w0qx03");
+    			add_location(div0, file, 260, 4, 4897);
     			set_style(div1, "height", "200px");
-    			set_style(div1, "background-color", "white");
-    			add_location(div1, file, 259, 3, 4855);
+    			add_location(div1, file, 259, 3, 4862);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div1, anchor);
     			append_dev(div1, div0);
     			append_dev(div0, h2);
-    			current = true;
-    		},
-    		i: function intro(local) {
-    			if (current) return;
-
-    			add_render_callback(() => {
-    				if (div1_outro) div1_outro.end(1);
-    				div1_intro = create_in_transition(div1, fly, { y: -50, duration: 2000 });
-    				div1_intro.start();
-    			});
-
-    			current = true;
-    		},
-    		o: function outro(local) {
-    			if (div1_intro) div1_intro.invalidate();
-    			div1_outro = create_out_transition(div1, fly, { y: -50, duration: 2000 });
-    			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div1);
-    			if (detaching && div1_outro) div1_outro.end();
     		}
     	};
 
@@ -982,8 +904,8 @@ var app = (function () {
     			set_style(span, "margin", "0");
     			set_style(span, "top", "0px");
     			set_style(span, "left", "0");
-    			attr_dev(span, "class", "time svelte-13vrey0");
-    			add_location(span, file, 270, 8, 5260);
+    			attr_dev(span, "class", "time svelte-1w0qx03");
+    			add_location(span, file, 270, 8, 5172);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -1032,8 +954,8 @@ var app = (function () {
     			set_style(span, "margin", "0");
     			set_style(span, "top", "0");
     			set_style(span, "right", "5px");
-    			attr_dev(span, "class", "time svelte-13vrey0");
-    			add_location(span, file, 274, 8, 5606);
+    			attr_dev(span, "class", "time svelte-1w0qx03");
+    			add_location(span, file, 274, 8, 5518);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
@@ -1077,8 +999,8 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Set Alarm";
-    			attr_dev(button, "class", "setAlarm svelte-13vrey0");
-    			add_location(button, file, 283, 7, 6070);
+    			attr_dev(button, "class", "setAlarm svelte-1w0qx03");
+    			add_location(button, file, 283, 7, 5982);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1117,8 +1039,8 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Disable";
-    			attr_dev(button, "class", "disableAlarm svelte-13vrey0");
-    			add_location(button, file, 281, 7, 5920);
+    			attr_dev(button, "class", "disableAlarm svelte-1w0qx03");
+    			add_location(button, file, 281, 7, 5832);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1156,8 +1078,8 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "Set alarm to a valid time";
-    			attr_dev(p, "class", "svelte-13vrey0");
-    			add_location(p, file, 289, 7, 6334);
+    			attr_dev(p, "class", "svelte-1w0qx03");
+    			add_location(p, file, 289, 7, 6246);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -1203,10 +1125,10 @@ var app = (function () {
     			t0 = text("Alarm set to: ");
     			b = element("b");
     			t1 = text(t1_value);
-    			attr_dev(b, "class", "svelte-13vrey0");
-    			add_location(b, file, 287, 32, 6243);
-    			attr_dev(p, "class", "svelte-13vrey0");
-    			add_location(p, file, 287, 7, 6218);
+    			attr_dev(b, "class", "svelte-1w0qx03");
+    			add_location(b, file, 287, 32, 6155);
+    			attr_dev(p, "class", "svelte-1w0qx03");
+    			add_location(p, file, 287, 7, 6130);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -1249,11 +1171,11 @@ var app = (function () {
     	const block = {
     		c: function create() {
     			line = svg_element("line");
-    			attr_dev(line, "class", "minor svelte-13vrey0");
+    			attr_dev(line, "class", "minor svelte-1w0qx03");
     			attr_dev(line, "y1", "42");
     			attr_dev(line, "y2", "45");
     			attr_dev(line, "transform", "rotate(" + 6 * (/*minute*/ ctx[13] + /*offset*/ ctx[16]) + ")");
-    			add_location(line, file, 307, 8, 6924);
+    			add_location(line, file, 307, 8, 6836);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, line, anchor);
@@ -1295,11 +1217,11 @@ var app = (function () {
     			}
 
     			each_1_anchor = empty();
-    			attr_dev(line, "class", "major svelte-13vrey0");
+    			attr_dev(line, "class", "major svelte-1w0qx03");
     			attr_dev(line, "y1", "35");
     			attr_dev(line, "y2", "45");
     			attr_dev(line, "transform", "rotate(" + 30 * /*minute*/ ctx[13] + ")");
-    			add_location(line, file, 300, 7, 6759);
+    			add_location(line, file, 300, 7, 6671);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, line, anchor);
@@ -1339,8 +1261,8 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Set Alarm";
-    			attr_dev(button, "class", "setAlarm svelte-13vrey0");
-    			add_location(button, file, 337, 6, 7693);
+    			attr_dev(button, "class", "setAlarm svelte-1w0qx03");
+    			add_location(button, file, 337, 6, 7605);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1379,8 +1301,8 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Disable";
-    			attr_dev(button, "class", "disableAlarm svelte-13vrey0");
-    			add_location(button, file, 335, 6, 7545);
+    			attr_dev(button, "class", "disableAlarm svelte-1w0qx03");
+    			add_location(button, file, 335, 6, 7457);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1418,8 +1340,8 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "Set alarm to a valid time";
-    			attr_dev(p, "class", "svelte-13vrey0");
-    			add_location(p, file, 343, 6, 7950);
+    			attr_dev(p, "class", "svelte-1w0qx03");
+    			add_location(p, file, 343, 6, 7862);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -1465,10 +1387,10 @@ var app = (function () {
     			t0 = text("Alarm set to: ");
     			b = element("b");
     			t1 = text(t1_value);
-    			attr_dev(b, "class", "svelte-13vrey0");
-    			add_location(b, file, 341, 30, 7861);
-    			attr_dev(p, "class", "svelte-13vrey0");
-    			add_location(p, file, 341, 5, 7836);
+    			attr_dev(b, "class", "svelte-1w0qx03");
+    			add_location(b, file, 341, 30, 7773);
+    			attr_dev(p, "class", "svelte-1w0qx03");
+    			add_location(p, file, 341, 5, 7748);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -1514,8 +1436,8 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Set Alarm";
-    			attr_dev(button, "class", "setAlarm svelte-13vrey0");
-    			add_location(button, file, 366, 4, 9294);
+    			attr_dev(button, "class", "setAlarm svelte-1w0qx03");
+    			add_location(button, file, 366, 4, 9263);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1554,8 +1476,8 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			button.textContent = "Disable";
-    			attr_dev(button, "class", "disableAlarm svelte-13vrey0");
-    			add_location(button, file, 364, 4, 9150);
+    			attr_dev(button, "class", "disableAlarm svelte-1w0qx03");
+    			add_location(button, file, 364, 4, 9119);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -1593,8 +1515,8 @@ var app = (function () {
     		c: function create() {
     			p = element("p");
     			p.textContent = "Set alarm to a valid time";
-    			attr_dev(p, "class", "svelte-13vrey0");
-    			add_location(p, file, 372, 4, 9543);
+    			attr_dev(p, "class", "svelte-1w0qx03");
+    			add_location(p, file, 372, 4, 9512);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -1640,10 +1562,10 @@ var app = (function () {
     			t0 = text("Alarm set to: ");
     			b = element("b");
     			t1 = text(t1_value);
-    			attr_dev(b, "class", "svelte-13vrey0");
-    			add_location(b, file, 370, 29, 9458);
-    			attr_dev(p, "class", "svelte-13vrey0");
-    			add_location(p, file, 370, 4, 9433);
+    			attr_dev(b, "class", "svelte-1w0qx03");
+    			add_location(b, file, 370, 29, 9427);
+    			attr_dev(p, "class", "svelte-1w0qx03");
+    			add_location(p, file, 370, 4, 9402);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, p, anchor);
@@ -1741,7 +1663,6 @@ var app = (function () {
     	let input2;
     	let t21;
     	let t22;
-    	let current;
     	let mounted;
     	let dispose;
     	let if_block0 = /*clock*/ ctx[0].isTriggered && create_if_block_12(ctx);
@@ -1884,7 +1805,7 @@ var app = (function () {
     			attr_dev(link2, "href", "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@1,300&family=Roboto+Mono:wght@400;700&display=swap");
     			attr_dev(link2, "rel", "stylesheet");
     			add_location(link2, file, 2, 0, 131);
-    			add_location(h1, file, 257, 1, 4803);
+    			add_location(h1, file, 257, 1, 4810);
     			set_style(span, "font-size", "3em");
     			set_style(span, "position", "absolute");
     			set_style(span, "margin", "0");
@@ -1892,110 +1813,113 @@ var app = (function () {
     			set_style(span, "left", "80px");
     			set_style(span, "display", "inline-block");
     			set_style(span, "height", "5px");
-    			add_location(span, file, 272, 8, 5436);
+    			add_location(span, file, 272, 8, 5348);
     			attr_dev(div0, "id", "digitalClock");
-    			attr_dev(div0, "class", "svelte-13vrey0");
-    			add_location(div0, file, 268, 6, 5196);
+    			attr_dev(div0, "class", "svelte-1w0qx03");
+    			add_location(div0, file, 268, 6, 5108);
     			set_style(div1, "position", "relative");
     			set_style(div1, "height", "200px");
-    			add_location(div1, file, 267, 5, 5141);
+    			add_location(div1, file, 267, 5, 5053);
     			attr_dev(input0, "type", "time");
-    			attr_dev(input0, "class", "svelte-13vrey0");
-    			add_location(input0, file, 279, 6, 5836);
+    			attr_dev(input0, "class", "svelte-1w0qx03");
+    			add_location(input0, file, 279, 6, 5748);
     			attr_dev(div2, "class", "item");
-    			add_location(div2, file, 278, 5, 5810);
-    			attr_dev(div3, "class", "clock svelte-13vrey0");
-    			add_location(div3, file, 266, 2, 5115);
-    			attr_dev(circle, "class", "clock-face svelte-13vrey0");
+    			add_location(div2, file, 278, 5, 5722);
+    			attr_dev(div3, "class", "clock svelte-1w0qx03");
+    			add_location(div3, file, 266, 2, 5027);
+    			attr_dev(circle, "class", "clock-face svelte-1w0qx03");
     			attr_dev(circle, "r", "48");
-    			add_location(circle, file, 297, 6, 6619);
-    			attr_dev(line0, "class", "hour svelte-13vrey0");
+    			add_location(circle, file, 297, 6, 6531);
+    			attr_dev(line0, "class", "hour svelte-1w0qx03");
     			attr_dev(line0, "y1", "2");
     			attr_dev(line0, "y2", "-20");
     			attr_dev(line0, "transform", line0_transform_value = "rotate(" + 0.5 * /*$minuteClock*/ ctx[3] + ")");
-    			add_location(line0, file, 316, 6, 7120);
-    			attr_dev(line1, "class", "minute svelte-13vrey0");
+    			add_location(line0, file, 316, 6, 7032);
+    			attr_dev(line1, "class", "minute svelte-1w0qx03");
     			attr_dev(line1, "y1", "4");
     			attr_dev(line1, "y2", "-30");
     			attr_dev(line1, "transform", line1_transform_value = "rotate(" + 6 * /*$minuteClock*/ ctx[3] + ")");
-    			add_location(line1, file, 324, 6, 7280);
+    			add_location(line1, file, 324, 6, 7192);
     			attr_dev(svg0, "viewBox", "-50 -50 100 100");
     			set_style(svg0, "width", "70%");
     			set_style(svg0, "height", "100%");
-    			attr_dev(svg0, "class", "svelte-13vrey0");
-    			add_location(svg0, file, 296, 5, 6548);
+    			attr_dev(svg0, "class", "svelte-1w0qx03");
+    			add_location(svg0, file, 296, 5, 6460);
     			attr_dev(div4, "class", "item");
     			set_style(div4, "height", "200px");
-    			add_location(div4, file, 295, 4, 6500);
+    			add_location(div4, file, 295, 4, 6412);
     			attr_dev(input1, "type", "time");
-    			attr_dev(input1, "class", "svelte-13vrey0");
-    			add_location(input1, file, 333, 5, 7466);
+    			attr_dev(input1, "class", "svelte-1w0qx03");
+    			add_location(input1, file, 333, 5, 7378);
     			set_style(div5, "margin-top", "5px");
-    			add_location(div5, file, 332, 4, 7429);
-    			attr_dev(div6, "class", "clock svelte-13vrey0");
-    			add_location(div6, file, 293, 2, 6415);
+    			add_location(div5, file, 332, 4, 7341);
+    			attr_dev(div6, "class", "clock svelte-1w0qx03");
+    			add_location(div6, file, 293, 2, 6327);
     			attr_dev(rect0, "x", "0");
     			attr_dev(rect0, "y", rect0_y_value = 198 - /*clock*/ ctx[0].time.hour * 8.53);
     			attr_dev(rect0, "width", "100%");
     			attr_dev(rect0, "height", "200");
     			set_style(rect0, "fill", "rgb(0,0,255)");
     			set_style(rect0, "stroke", "rgb(0,0,0)");
-    			add_location(rect0, file, 351, 6, 8294);
-    			attr_dev(text0, "class", "tttt svelte-13vrey0");
+    			add_location(rect0, file, 351, 6, 8263);
+    			attr_dev(text0, "class", "tttt svelte-1w0qx03");
     			attr_dev(text0, "x", "50%");
     			attr_dev(text0, "y", "50%");
     			attr_dev(text0, "dominant-baseline", "middle");
     			attr_dev(text0, "text-anchor", "middle");
-    			add_location(text0, file, 352, 6, 8423);
+    			add_location(text0, file, 352, 6, 8392);
     			attr_dev(svg1, "width", "80");
     			attr_dev(svg1, "height", "200");
     			set_style(svg1, "width", "80%");
     			set_style(svg1, "border", "3px solid green");
-    			attr_dev(svg1, "class", "svelte-13vrey0");
-    			add_location(svg1, file, 350, 5, 8212);
+    			attr_dev(svg1, "class", "svelte-1w0qx03");
+    			add_location(svg1, file, 350, 5, 8181);
     			attr_dev(div7, "class", "hourMeter");
     			set_style(div7, "width", "50%");
     			set_style(div7, "height", "100%");
-    			add_location(div7, file, 349, 4, 8149);
+    			add_location(div7, file, 349, 4, 8118);
     			attr_dev(rect1, "x", "0");
     			attr_dev(rect1, "y", rect1_y_value = 198 - /*clock*/ ctx[0].time.minute * 3.33);
     			attr_dev(rect1, "width", "100%");
     			attr_dev(rect1, "height", "200");
     			set_style(rect1, "fill", "rgb(0,0,255)");
     			set_style(rect1, "stroke", "rgb(0,0,0)");
-    			add_location(rect1, file, 357, 6, 8737);
-    			attr_dev(text1, "class", "tttt svelte-13vrey0");
+    			add_location(rect1, file, 357, 6, 8706);
+    			attr_dev(text1, "class", "tttt svelte-1w0qx03");
     			attr_dev(text1, "x", "50%");
     			attr_dev(text1, "y", "50%");
     			attr_dev(text1, "dominant-baseline", "middle");
     			attr_dev(text1, "text-anchor", "middle");
-    			add_location(text1, file, 358, 6, 8867);
+    			add_location(text1, file, 358, 6, 8836);
     			attr_dev(svg2, "width", "80");
     			attr_dev(svg2, "height", "200");
     			set_style(svg2, "width", "80%");
     			set_style(svg2, "border", "3px solid green");
-    			attr_dev(svg2, "class", "svelte-13vrey0");
-    			add_location(svg2, file, 356, 5, 8655);
+    			attr_dev(svg2, "class", "svelte-1w0qx03");
+    			add_location(svg2, file, 356, 5, 8624);
     			attr_dev(div8, "class", "minuteMeter");
     			set_style(div8, "width", "50%");
     			set_style(div8, "height", "100%");
-    			add_location(div8, file, 355, 4, 8590);
+    			add_location(div8, file, 355, 4, 8559);
     			set_style(div9, "height", "auto");
     			set_style(div9, "display", "flex");
     			set_style(div9, "justify-content", "space-around");
     			set_style(div9, "text-align", "center");
-    			add_location(div9, file, 348, 3, 8051);
+    			set_style(div9, "margin-top", "10px");
+    			set_style(div9, "margin-left", "10px");
+    			set_style(div9, "margin-right", "10px");
+    			add_location(div9, file, 348, 3, 7963);
     			attr_dev(input2, "type", "time");
-    			attr_dev(input2, "class", "svelte-13vrey0");
-    			add_location(input2, file, 362, 4, 9075);
+    			attr_dev(input2, "class", "svelte-1w0qx03");
+    			add_location(input2, file, 362, 4, 9044);
     			set_style(div10, "margin-top", "5px");
-    			add_location(div10, file, 361, 3, 9039);
-    			attr_dev(div11, "class", "clock svelte-13vrey0");
-    			add_location(div11, file, 347, 2, 8027);
-    			attr_dev(div12, "class", "container svelte-13vrey0");
-    			add_location(div12, file, 265, 1, 5088);
-    			attr_dev(main, "class", "svelte-13vrey0");
-    			add_location(main, file, 256, 0, 4794);
+    			add_location(div10, file, 361, 3, 9008);
+    			attr_dev(div11, "class", "clock svelte-1w0qx03");
+    			add_location(div11, file, 347, 2, 7939);
+    			attr_dev(div12, "class", "container svelte-1w0qx03");
+    			add_location(div12, file, 265, 1, 5000);
+    			attr_dev(main, "class", "svelte-1w0qx03");
+    			add_location(main, file, 256, 0, 4801);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2071,7 +1995,6 @@ var app = (function () {
     			if (if_block5) if_block5.m(div10, null);
     			append_dev(div10, t22);
     			if (if_block6) if_block6.m(div10, null);
-    			current = true;
 
     			if (!mounted) {
     				dispose = [
@@ -2085,24 +2008,14 @@ var app = (function () {
     		},
     		p: function update(ctx, [dirty]) {
     			if (/*clock*/ ctx[0].isTriggered) {
-    				if (if_block0) {
-    					if (dirty & /*clock*/ 1) {
-    						transition_in(if_block0, 1);
-    					}
-    				} else {
+    				if (if_block0) ; else {
     					if_block0 = create_if_block_12(ctx);
     					if_block0.c();
-    					transition_in(if_block0, 1);
     					if_block0.m(main, t5);
     				}
     			} else if (if_block0) {
-    				group_outros();
-
-    				transition_out(if_block0, 1, 1, () => {
-    					if_block0 = null;
-    				});
-
-    				check_outros();
+    				if_block0.d(1);
+    				if_block0 = null;
     			}
 
     			if (dirty & /*clock*/ 1 && safe_not_equal(previous_key, previous_key = /*clock*/ ctx[0].time.hour)) {
@@ -2158,11 +2071,11 @@ var app = (function () {
     				}
     			}
 
-    			if (!current || dirty & /*$minuteClock*/ 8 && line0_transform_value !== (line0_transform_value = "rotate(" + 0.5 * /*$minuteClock*/ ctx[3] + ")")) {
+    			if (dirty & /*$minuteClock*/ 8 && line0_transform_value !== (line0_transform_value = "rotate(" + 0.5 * /*$minuteClock*/ ctx[3] + ")")) {
     				attr_dev(line0, "transform", line0_transform_value);
     			}
 
-    			if (!current || dirty & /*$minuteClock*/ 8 && line1_transform_value !== (line1_transform_value = "rotate(" + 6 * /*$minuteClock*/ ctx[3] + ")")) {
+    			if (dirty & /*$minuteClock*/ 8 && line1_transform_value !== (line1_transform_value = "rotate(" + 6 * /*$minuteClock*/ ctx[3] + ")")) {
     				attr_dev(line1, "transform", line1_transform_value);
     			}
 
@@ -2195,17 +2108,17 @@ var app = (function () {
     				}
     			}
 
-    			if (!current || dirty & /*clock*/ 1 && rect0_y_value !== (rect0_y_value = 198 - /*clock*/ ctx[0].time.hour * 8.53)) {
+    			if (dirty & /*clock*/ 1 && rect0_y_value !== (rect0_y_value = 198 - /*clock*/ ctx[0].time.hour * 8.53)) {
     				attr_dev(rect0, "y", rect0_y_value);
     			}
 
-    			if ((!current || dirty & /*clock*/ 1) && t17_value !== (t17_value = /*clock*/ ctx[0].time.hour.toString().padStart(2, "0") + "")) set_data_dev(t17, t17_value);
+    			if (dirty & /*clock*/ 1 && t17_value !== (t17_value = /*clock*/ ctx[0].time.hour.toString().padStart(2, "0") + "")) set_data_dev(t17, t17_value);
 
-    			if (!current || dirty & /*clock*/ 1 && rect1_y_value !== (rect1_y_value = 198 - /*clock*/ ctx[0].time.minute * 3.33)) {
+    			if (dirty & /*clock*/ 1 && rect1_y_value !== (rect1_y_value = 198 - /*clock*/ ctx[0].time.minute * 3.33)) {
     				attr_dev(rect1, "y", rect1_y_value);
     			}
 
-    			if ((!current || dirty & /*clock*/ 1) && t19_value !== (t19_value = /*clock*/ ctx[0].time.minute.toString().padStart(2, "0") + "")) set_data_dev(t19, t19_value);
+    			if (dirty & /*clock*/ 1 && t19_value !== (t19_value = /*clock*/ ctx[0].time.minute.toString().padStart(2, "0") + "")) set_data_dev(t19, t19_value);
 
     			if (dirty & /*alarm*/ 2) {
     				set_input_value(input2, /*alarm*/ ctx[1]);
@@ -2237,20 +2150,15 @@ var app = (function () {
     			}
     		},
     		i: function intro(local) {
-    			if (current) return;
-    			transition_in(if_block0);
     			transition_in(key_block0);
     			transition_in(key_block1);
     			transition_in(if_block2);
     			transition_in(if_block4);
     			transition_in(if_block6);
-    			current = true;
     		},
     		o: function outro(local) {
-    			transition_out(if_block0);
     			transition_out(key_block0);
     			transition_out(key_block1);
-    			current = false;
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(link0);
