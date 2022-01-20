@@ -276,7 +276,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 							{/key}
 						</div>
 					</div>
-					<div class="item">
+					<div class="item" style="margin-top: 25px;">
 						<input bind:value={alarm} type="time">			
 						{#if clock._alarmIsActive}
 							<button class="disableAlarm" on:click={()=>{ clock.deactivateAlarm(); alarm = ""; }}>Disable</button>
@@ -330,7 +330,7 @@ background: linear-gradient(45deg, rgba(215,255,0,0.9475140397956058) 12%, rgb(1
 						/>
 					</svg>
 					</div>
-				<div style="margin-top: 5px;">
+				<div style="margin-top: 25px;">
 					<input bind:value={alarm} type="time">
 					{#if clock._alarmIsActive}
 						<button class="disableAlarm" on:click={()=>{ clock.deactivateAlarm(); alarm = ""; }}>Disable</button>
