@@ -3,17 +3,25 @@
     let question;
     let IsHomePage = true;
     async function search() {
-        const res = await fetch(
+
+        try {
+            const res = await fetch(
             `https://demo.dataverse.org/api/search?q=` + question
         );
-        const json = await res.json();
-        // delay to show spinner. is this a good idea lol ?
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        if (res.ok) {
-            return json;
-        } else {
-            throw new Error(json);
+            const json = await res.json();
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            if (res.ok) {
+                return json;
+            } else {
+                throw new Error(json);
+            }
+        } catch {
+            return {error: "Search failed, please check your internet connection"}
         }
+        
+
+        // delay to show spinner. is this a good idea lol ?
+        
     }
 </script>
     {#if IsHomePage}

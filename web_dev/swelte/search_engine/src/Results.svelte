@@ -1,5 +1,6 @@
 <script>
     export let json;
+import { has_prop } from "svelte/internal";
     import { fly, fade, slide, draw } from "svelte/transition";
     import App from "./App.svelte";
 
@@ -36,13 +37,20 @@
                 {/if}
                 <h6>Published at: {item.published_at}</h6>    
             </div>
-            <hr style="width: 100%;">
+            <hr style="width: 100vw">
         {/each}
     </div>
 {:else if json}
-    <div class="column">
-        <p transition:fade>No Results Found</p>
-    </div>
+    {#if json.hasOwnProperty('error')}
+        <div class="column">
+            <p transition:fade>{json.error}</p>
+        </div>
+    {:else}
+        <div class="column">
+            <p transition:fade>No Results Found</p>
+        </div>
+    {/if}
+    
 {/if}
 
 <style>
