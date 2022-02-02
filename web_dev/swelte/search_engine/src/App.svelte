@@ -7,7 +7,6 @@
 
 <main>
     <Search />
-
     {#await $promise}
         <Spinner />
     {:then result}
@@ -40,10 +39,7 @@
         align-items: center;
         flex-direction: column;
         gap: 50px;
-        padding-top: 10%;
-        padding-left: 10% !important;
-        padding-right: 10% !important;
-        padding-bottom: 5%;
+        padding: 0;
         box-sizing: border-box;
     }
 

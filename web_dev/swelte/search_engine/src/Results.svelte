@@ -1,17 +1,16 @@
 <script>
     export let json;
     import { fly, fade, slide, draw } from "svelte/transition";
-import App from "./App.svelte";
+    import App from "./App.svelte";
 
     function processUrl( url ){
         let split = url.split("/");
         let output = "";
-        console.log(split)
-        console.log(url)
+
         split.forEach((element, index) => {
             if ( index == 0 ){
                 output +=  element + "//"
-                console.log(output)
+
             } else if (index == 1){
                 output += "";
             } else if (index + 1 == split.length){
@@ -20,8 +19,6 @@ import App from "./App.svelte";
                 output += element + " " + ">" + " ";
             }
         });
-        console.log(output)
-        console.log("-------")
         return output;
     }
 </script>
@@ -35,16 +32,16 @@ import App from "./App.svelte";
                 {#if item.description}
                     <h5>{item.description.length > 250 ? item.description.substring(0, 250 - 3) + "..." : item.description.substring(0, 250)}</h5>
                 {:else}
-                    <h5>No description is available</h5>
+                    <h5>No description is available.</h5>
                 {/if}
-                <h6>{item.published_at}</h6>
-                
-            </div>   
+                <h6>Published at: {item.published_at}</h6>    
+            </div>
+            <hr style="width: 100%;">
         {/each}
     </div>
 {:else if json}
     <div class="column">
-        <p transition:fade>{JSON.stringify(json)}</p>
+        <p transition:fade>No Results Found</p>
     </div>
 {/if}
 
@@ -55,10 +52,12 @@ import App from "./App.svelte";
         align-items: start;
         flex-direction: column;
         overflow-y: scroll;
+        overflow-x: hidden;
         box-sizing: border-box;
-        padding-left: 10%;
-        padding-right: 10%;
+        padding-left: 1%;
+        padding-right: 1%;
         max-width: 100%;
+        width: 100%;
     }
 
     .column p {
@@ -84,5 +83,6 @@ import App from "./App.svelte";
         background-image: linear-gradient(45deg, #00aeff, #a68eff);
         border-radius: 10px;
         -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 3px 13px 1px;
+        box-shadow: rgba(0, 0, 0, 0.12) 0 3px 13px 1px;
     }
 </style>
