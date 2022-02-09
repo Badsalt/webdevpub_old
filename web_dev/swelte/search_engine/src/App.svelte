@@ -38,7 +38,6 @@
         justify-content: start;
         align-items: center;
         flex-direction: column;
-        gap: 50px;
         padding: 0;
         box-sizing: border-box;
     }

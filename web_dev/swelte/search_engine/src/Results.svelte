@@ -1,6 +1,7 @@
 <script>
     export let json;
-import { has_prop } from "svelte/internal";
+    import { has_prop } from "svelte/internal";
+    import { IsHomePage } from "./stores.js";
     import { fly, fade, slide, draw } from "svelte/transition";
     import App from "./App.svelte";
 
@@ -24,9 +25,10 @@ import { has_prop } from "svelte/internal";
     }
 </script>
 
-{#if json && "data" in json && "items" in json.data && json.data.items.length > 0}
+{#if json && "data" in json && "items" in json.data && json.data.items.length > 0 && !$IsHomePage}
     <div class="column">
         {#each json.data.items as item}
+        <div class="searchResultsContainer">
             <div class="searchResults">
                 <h2>{processUrl(item.url)}</h2>
                 <a href="{item.url}">{item.name}</a>
@@ -37,30 +39,52 @@ import { has_prop } from "svelte/internal";
                 {/if}
                 <h6>Published at: {item.published_at}</h6>    
             </div>
-            <hr style="width: 100vw">
+        </div>
         {/each}
     </div>
-{:else if json}
+{:else if json && !$IsHomePage}
     {#if json.hasOwnProperty('error')}
         <div class="column">
             <p transition:fade>{json.error}</p>
         </div>
-    {:else}
-        <div class="column">
-            <p transition:fade>No Results Found</p>
+    {:else if !$IsHomePage}
+        <div style="height: 100%; width: 100%;">
+            <div class="column">
+                <p transition:fade>No Results Found</p>
+                <img src="" alt="">
+            </div>
         </div>
+
+
+
+
     {/if}
     
 {/if}
 
 <style>
+
+    .searchResults{
+        margin: 5px 10px;
+    }
+
+    .searchResultsContainer {
+        width: 95%; 
+        margin: 0;
+        border-style: inset;
+        border-radius: 25px;
+        border-color: blue;
+        border-width: 10px;
+        margin: 10px 0;
+        background-color: lightblue;
+    }
+
     .column {
         display: flex;
         justify-content: start;
-        align-items: start;
+        align-items: center;
         flex-direction: column;
         overflow-y: scroll;
-        overflow-x: hidden;
         box-sizing: border-box;
         padding-left: 1%;
         padding-right: 1%;

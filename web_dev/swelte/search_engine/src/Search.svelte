@@ -1,7 +1,9 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script>
     import { promise } from "./stores.js";
+    import { IsHomePage } from "./stores.js";
     let question;
-    let IsHomePage = true;
+    $IsHomePage = true;
     async function search() {
 
         try {
@@ -24,45 +26,76 @@
         
     }
 </script>
-    {#if IsHomePage}
+    {#if $IsHomePage}
     <h1>Home Page</h1>
     <img src="./logga.png" alt="Logotype">
     <div class="row">
         <form
             on:submit|preventDefault={() => {
                 $promise = search();
-                IsHomePage = false;
+                $IsHomePage = false;
             }}
         >
-            <input bind:value={question} />
+            <input bind:value={question} /> 
+            <button type="submit" class="searchButton"><i class="fa fa-search fa-lg"></i></button>
         </form>
+        <div>
+            <form on:submit|preventDefault={() => {
+                $promise = search();
+                $IsHomePage = false;
+            }} >
+                <button type="submit">Random Search</button>
+            </form>
+            
+        </div>
+
     </div>
     {:else}
     
         <div class="header-search">
             
             <div class="row">
-                <button style="display: inline-block;" on:click={() => IsHomePage = true}><img src="./logga.png" alt="Go to Home Page"></button>
+                <div class="icon" on:click={() => $IsHomePage = true}><img src="./logga.png" alt="Go to Home Page" title="Go to Home Page"></div>
                 <form
                 on:submit|preventDefault={() => {
                     $promise = search();
                 }}
             >
                 <input bind:value={question} />
+                <button type="submit" class="searchButton"><i class="fa fa-search fa-lg"></i></button>
             </form>
-            </div>
+            </div> 
         </div>
     {/if}
 
 
 
 <style>
+
+    .icon {
+        background-color: transparent;
+        display: inline-block;
+        margin-left: 20px;
+        margin-top: 10px;
+    }
+
+    .icon:hover,
+    .searchButton:hover {
+        cursor: pointer;
+    }
+
+    .searchButton {
+        border-radius: 50%;
+        padding: 15px;
+    }
+
     .row {
         display: flex;
         gap: 10px;
-        width: 50%;
+        width: 75%;
         justify-self: center;
         align-items: center;
+        justify-content: center;
     }
     .header-search {
         margin-top: 2px;
@@ -71,7 +104,7 @@
     }
     form,
     form input {
-        width: 100%;
+        width: 90%;
         border-radius: 50px;
         padding: 15px;
     }
