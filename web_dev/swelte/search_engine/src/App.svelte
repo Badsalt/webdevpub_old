@@ -3,6 +3,7 @@
     import Results from "./Results.svelte";
     import Search from "./Search.svelte";
     import { promise } from "./stores.js";
+    import SpinnerNew from "./Spinner_new.svelte"
 </script>
 
 <main>

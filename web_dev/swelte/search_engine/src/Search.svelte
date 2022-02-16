@@ -11,6 +11,7 @@
             `https://demo.dataverse.org/api/search?q=` + question
         );
             const json = await res.json();
+            // delay to show spinner. is this a good idea lol ?
             await new Promise((resolve) => setTimeout(resolve, 1000));
             if (res.ok) {
                 return json;
@@ -22,47 +23,39 @@
         }
         
 
-        // delay to show spinner. is this a good idea lol ?
+        
         
     }
 </script>
+    
     {#if $IsHomePage}
-    <h1>Home Page</h1>
-    <img src="./logga.png" alt="Logotype">
-    <div class="row">
+    <div class="container">
+    <h1>Cloud Search</h1>
         <form
             on:submit|preventDefault={() => {
                 $promise = search();
                 $IsHomePage = false;
             }}
         >
-            <input bind:value={question} /> 
-            <button type="submit" class="searchButton"><i class="fa fa-search fa-lg"></i></button>
+            <input placeholder="Search Here" bind:value={question} /> 
+            <span class="fa fa-search fa-lg searchIcon"></span>
+            <span class="fa fa-gear fa-2x settingsIcon"></span>
         </form>
-        <div>
-            <form on:submit|preventDefault={() => {
-                $promise = search();
-                $IsHomePage = false;
-            }} >
-                <button type="submit">Random Search</button>
-            </form>
-            
-        </div>
-
-    </div>
+    </div> 
     {:else}
     
         <div class="header-search">
-            
+            <h1>Cloud Search</h1>
             <div class="row">
-                <div class="icon" on:click={() => $IsHomePage = true}><img src="./logga.png" alt="Go to Home Page" title="Go to Home Page"></div>
+                <div class="icon" on:click={() => $IsHomePage = true}><img style="height: 80px;" src="./pic/cloud-icon.png" alt="Go to Home Page" title="Go to Home Page"></div>
                 <form
                 on:submit|preventDefault={() => {
                     $promise = search();
                 }}
             >
-                <input bind:value={question} />
-                <button type="submit" class="searchButton"><i class="fa fa-search fa-lg"></i></button>
+                <input placeholder="Search Here" bind:value={question} />
+                <span class="fa fa-search fa-lg searchIcon"></span>
+                <span class="fa fa-gear fa-2x settingsIcon"></span>
             </form>
             </div> 
         </div>
@@ -72,6 +65,10 @@
 
 <style>
 
+    * {
+        outline: 0 !important;
+    }
+
     .icon {
         background-color: transparent;
         display: inline-block;
@@ -80,32 +77,59 @@
     }
 
     .icon:hover,
-    .searchButton:hover {
+    input:hover{
+        cursor: pointer;
+        background-color: lightblue;
+    }
+
+    /*.searchButton:hover i {
+        font-size: 1.5em;
+    } */
+
+    .settingsIcon{
+        display:inline-block;
+        position: absolute;       
+    }
+
+    .searchIcon {
+        display:inline-block;
+        position: absolute;
+        left: 15px;
+        top: 15px;
+    }
+
+    .settingsIcon {
+        right: 17px;
+        top: 8px;
+    }
+
+    .settingsIcon {
+        transform: rotate(20deg);
+    }
+    .settingsIcon:hover{
+        transform: rotate(180deg);
         cursor: pointer;
     }
 
-    .searchButton {
-        border-radius: 50%;
-        padding: 15px;
-    }
-
-    .row {
-        display: flex;
-        gap: 10px;
-        width: 75%;
-        justify-self: center;
-        align-items: center;
-        justify-content: center;
+    .container {
+        margin-top: 30vh;
+        width: 100%;
+        text-align: center;
     }
     .header-search {
         margin-top: 2px;
         width: 100%;
-        text-align: center;
+        text-align: center
     }
-    form,
+    form {
+        width: 80%;
+        position: relative;
+        margin: 0 auto;
+    }
     form input {
-        width: 90%;
+        width: 100%;
         border-radius: 50px;
         padding: 15px;
+        text-indent: 45px;
     }
 </style>
