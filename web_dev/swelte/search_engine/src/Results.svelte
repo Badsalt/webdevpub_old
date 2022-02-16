@@ -63,6 +63,9 @@
 {/if}
 
 <style>
+    :global(body) {
+        font-family: 'Courier New', Courier, monospace;
+    }
 
     .searchResults{
         margin: 5px 10px;
