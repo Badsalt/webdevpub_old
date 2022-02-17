@@ -1,17 +1,17 @@
 <script>
     import { fly } from "svelte/transition";
-    const amountOfQuestionMarks = 1;
+    const amountOfQuestionMarks = 5;
     let isActive = true;
-    let i = 0;
-    
+    let duration = 500;
+    let y = -100;
 
-    while (i <= amountOfQuestionMarks){
-        
-        console.log(isActive)
-        console.log(i)
-        i++;
+    async function myLoop() {
+        setTimeout(function () {
+            toggle();
+            myLoop();
+        }, 500);
     }
-    
+
     function toggle() {
         if (isActive) {
             isActive = false;
@@ -19,41 +19,62 @@
             isActive = true;
         }
     }
-
+    myLoop();
 </script>
 
 <main>
     <div class="container">
-        <div class="search">
-            <span
-                ><img
-                    height="200px"
-                    src="./pic/cloud-icon.png"
-                    alt="Cloud"
-                /></span
-            >
-
-            {#if isActive}
-                <span out:fly={{ y: -200, duration: 1000 }} class="questionMark"
-                    >?</span
+        <span
+            ><img height="200px" src="./pic/cloud-icon.png" alt="Cloud" /></span
+        >
+        {#if isActive}
+            <div class="flexcontainer">
+                <span
+                    out:fly={{ y, duration }}
+                    class="questionMark"
+                    style="transform: rotate(40deg);">?</span
                 >
-            {/if}
-
-            <button on:click={toggle} />
-        </div>
+                <span
+                    out:fly={{ y, duration }}
+                    class="questionMark"
+                    style="transform: rotate(30deg);">?</span
+                >
+                <span out:fly={{ y, duration }} class="questionMark">?</span>
+                <span
+                    out:fly={{ y, duration }}
+                    class="questionMark"
+                    style="transform: rotate(-30deg);">?</span
+                >
+                <span
+                    out:fly={{ y, duration }}
+                    class="questionMark"
+                    style="transform: rotate(-40deg);">?</span
+                >
+            </div>
+        {/if}
     </div>
 </main>
 
 <style>
-    .container {
-        margin: 0 auto;
+    main {
         width: 100%;
-        text-align: center;
     }
 
-    .search {
+    .container {
+        margin: 0 auto;
+        margin-top: 20px;
         width: 50%;
+        text-align: center;
         position: relative;
+        height: 275px;
+    }
+
+    .flexcontainer {
+        display: flex;
+        align-items: center;
+        align-self: center;
+        align-content: center;
+        justify-content: center;
     }
 
     .questionMark {
