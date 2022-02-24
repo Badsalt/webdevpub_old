@@ -8,7 +8,7 @@
 
         try {
             const res = await fetch(
-            `https://demo.dataverse.org/api/search?q=` + question
+            `https://demo.dataverse.org/api/search?q=` + question + "&per_page=50"
         );
             const json = await res.json();
             // delay to show spinner. is this a good idea lol ?
@@ -30,7 +30,7 @@
     
     {#if $IsHomePage}
     <div class="container">
-    <h1>Cloud Search</h1>
+    <h1>CLOUD SEARCH</h1>
         <form
             on:submit|preventDefault={() => {
                 $promise = search();
@@ -45,20 +45,21 @@
     {:else}
     
         <div class="header-search">
-            <h1>Cloud Search</h1>
-            <div class="row">
-                <div class="icon" on:click={() => $IsHomePage = true}><img style="height: 80px;" src="./pic/cloud-icon.png" alt="Go to Home Page" title="Go to Home Page"></div>
-                <form
-                on:submit|preventDefault={() => {
-                    $promise = search();
-                }}
-            >
-                <input placeholder="Search Here" bind:value={question} />
-                <span class="fa fa-search fa-lg searchIcon"></span>
-                <span class="fa fa-gear fa-2x settingsIcon"></span>
-            </form>
-            </div> 
-        </div>
+            <h1>CLOUD SEARCH</h1>
+                <div class="flexContainer">
+                    <div class="icon" on:click={() => $IsHomePage = true}><img style="height: 100%;" src="./pic/cloud-icon.png" alt="Go to Home Page" title="Go to Home Page"></div>
+                    <form
+                    on:submit|preventDefault={() => {
+                        $promise = search();
+                    }}
+                >
+                    <input placeholder="Search Here" bind:value={question} />
+                    <span  class="fa fa-search fa-lg searchIcon"></span>
+                    <span class="fa fa-gear fa-2x settingsIcon"></span>
+                </form> 
+            </div>
+                </div>
+                
     {/if}
 
 
@@ -69,11 +70,15 @@
         outline: 0 !important;
     }
 
+    h1 {
+        color: rgb(10, 23, 95);
+    }
+
     .icon {
         background-color: transparent;
-        display: inline-block;
-        margin-left: 20px;
-        margin-top: 10px;
+        margin-right: 10px;
+        height: 50px;
+        padding: 5px;
     }
 
     .icon:hover,
@@ -88,7 +93,8 @@
 
     .settingsIcon{
         display:inline-block;
-        position: absolute;       
+        position: absolute;
+        color: rgb(10, 23, 95);       
     }
 
     .searchIcon {
@@ -96,6 +102,7 @@
         position: absolute;
         left: 15px;
         top: 15px;
+        color: rgb(10, 23, 95)
     }
 
     .settingsIcon {
@@ -113,18 +120,47 @@
 
     .container {
         margin-top: 30vh;
-        width: 100%;
+        width: 95%;
         text-align: center;
+        background-color: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+
+        border-radius: 50px;
     }
     .header-search {
-        margin-top: 2px;
-        width: 100%;
-        text-align: center
+        width: 100vw;
+        position: absolute;
+        z-index: 1000;
+        height: 150px;
+        text-align: center;  
+        background-color: rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+        /*https://www.w3schools.com/css/css3_shadows_box.asp */
+        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
     }
+
+    .container:hover{
+        /*https://www.w3schools.com/css/css3_shadows_box.asp */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .header-search .flexContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 5px 10px 10px 25px;
+    }
+
+    .header-search .flexContainer form {
+        margin: initial;
+    }
+    
     form {
-        width: 80%;
+        width: 60%;
         position: relative;
-        margin: 0 auto;
+        margin: 0 auto
+
     }
     form input {
         width: 100%;

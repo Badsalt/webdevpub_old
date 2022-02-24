@@ -23,12 +23,26 @@
         });
         return output;
     }
+
+    function processDate(date) {
+        let split = date.split("T");
+        let output = "";
+
+        split.forEach((element, index) => {
+            if(index == 0) {
+                output = element                
+            }
+        });
+        return output;
+    }
+
+
 </script>
 
 {#if json && "data" in json && "items" in json.data && json.data.items.length > 0 && !$IsHomePage}
     <div class="column">
         {#each json.data.items as item}
-        <div class="searchResultsContainer">
+        <div in:fly="{{ y: 100, duration: 500 }}" class="searchResultsContainer">
             <div class="searchResults">
                 <h2 class="title">{processUrl(item.url)}</h2>
                 <a class="link" href="{item.url}">{item.name}</a>
@@ -37,7 +51,7 @@
                 {:else}
                     <h5 class="description">No description is available.</h5>
                 {/if}
-                <h6 class="date">Published at: {item.published_at}</h6>    
+                <h6 class="date">Published: {processDate(item.published_at)}</h6>    
             </div>
         </div>
         {/each}
@@ -60,42 +74,47 @@
         font-family: 'Courier New', Courier, monospace;
     }
 
-    .searchResults{
+    .searchResults {
         margin: 5px 10px;
         opacity: 1;
     }
 
     .searchResultsContainer {
-        width: 75%; 
-        margin: 0;
-        border-style: inset;
+        width: 85%; 
+        /*border-style: inset; */
         border-radius: 25px;
-        border-color: blue;
-        border-width: 10px;
+        /*border-color: blue;
+        border-width: 10px; */
         margin: 10px 0;
-        background-color: black;
-        opacity: 0.9;
+        padding: 10px;  
+        background-color: rgba(22, 22, 22, 0.6);
+        backdrop-filter: blur(10px);
+
+    }
+    .searchResultsContainer:hover, .searchResultsContainer:active {
+        background-color: rgb(10, 23, 95);
+        backdrop-filter: blur(10px);
+        /*https://www.w3schools.com/css/css3_shadows_box.asp */
+        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 12px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     .searchResults .title {
         color: red;
-        font-size: 25px;
+        font-size: 15px;
     }
     .searchResults .link {
-        color: blue;
-        background-color: rgba(255, 255, 255, 0.8);
+        color: #5D8BF4;
+        /*background-color: rgba(255, 255, 255, 0.8);*/
         font-size: 20px;
-        padding: 5px;
-        display: inline-block;
         font-style: italic;
     } 
     .searchResults .description {
         font-size: 17px;
         letter-spacing: 0.05em;
-        color: green;
+        color: #F7AF1D;
     } 
-    .searchResults .date{
-        color: grey;
+    .searchResults .date {
+        color: yellow;
         font-size: 14px;
     }
     
@@ -111,6 +130,7 @@
         padding-right: 1%;
         max-width: 100%;
         width: 100%;
+        margin-top: 150px;
     }
 
     .column p {
@@ -133,7 +153,7 @@
         background-color: #ffffff33;
     }
     ::-webkit-scrollbar-thumb {
-        background-image: linear-gradient(45deg, #2a4703, #95ec0a);
+        background-color: rgb(255, 255, 255);
         border-radius: 10px;
         -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 3px 13px 1px;
         box-shadow: rgba(0, 0, 0, 0.12) 0 3px 13px 1px;
