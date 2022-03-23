@@ -109,7 +109,7 @@
         <div class="searchResultsContainer">
             <p style="color: red; font-size: 3em" transition:fade>No Results Found. You may <a style="color: red;" target="_b" href="https://youtu.be/dQw4w9WgXcQ">like</a></p> 
         </div>
-{/if}
+{/if}gi
 
 {/if}
 {/key}
