@@ -7,7 +7,6 @@
 </script>
 
 <main>
-      
     <Search />
     
     {#await $promise}
