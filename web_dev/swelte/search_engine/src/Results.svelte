@@ -93,7 +93,6 @@
         <ul class="pageNavigation">
             {#if pages >= 1}
                 {#each Array(pages) as _, i}
-
                     <li class:clicked={currentPage==i+1} on:click="{() => currentPage = i+1}">{i+1}</li>     
                 {/each}
             {/if}               
@@ -104,11 +103,11 @@
 {:else if json && !$IsHomePage}
 {#if json.hasOwnProperty('error')}
     <div class="searchResultsContainer">
-        <p style="color: red; font-size: 25px" transition:fade>{json.error}</p>
+        <p style="color: red; font-size: 2.5em" transition:fade>{json.error}</p>
     </div>
 {:else if !$IsHomePage}
         <div class="searchResultsContainer">
-            <p style="color: red; font-size: 30px" transition:fade>No Results Found</p>
+            <p style="color: red; font-size: 3em" transition:fade>No Results Found. You may <a style="color: red;" target="_b" href="https://youtu.be/dQw4w9WgXcQ">like</a></p> 
         </div>
 {/if}
 
@@ -119,6 +118,7 @@
 <style>
     :global(body) {
         font-family: 'Courier New', Courier, monospace;
+        font-size: 62.5%;
     }
 
     .searchResults {
@@ -132,8 +132,8 @@
         border-radius: 25px;
         /*border-color: blue;
         border-width: 10px; */
-        margin: 10px 0;
-        padding: 10px;  
+        margin: 1em 0;
+        padding: 1em;  
         background-color: rgba(22, 22, 22, 0.6);    
         backdrop-filter: blur(10px);
 
@@ -147,25 +147,29 @@
 
     .searchResults .title {
         color: red;
-        font-size: 15px;
+        font-size: 1.5em;
     }
     .searchResults .link {
         color: #5D8BF4;
         /*background-color: rgba(255, 255, 255, 0.8);*/
-        font-size: 20px;
+        font-size: 2em;
         font-style: italic;
     } 
     .searchResults .description {
-        font-size: 17px;
+        font-size: 1.7em;
         letter-spacing: 0.05em;
         color: #F7AF1D;
     } 
     .searchResults .date {
         color: yellow;
-        font-size: 14px;
+        font-size: 1.4em;
     }
     
-
+    @media screen and (max-width: 768px){
+        :global(body) {
+            font-size: 55%;
+        }
+    }
     .column {
         display: flex;
         justify-content: start;
@@ -189,7 +193,7 @@
 
 
     .pageNavigationContainer{
-        margin-bottom: 10px;
+        margin-bottom: 1em;
         position: fixed;
         bottom: 0;
         background-color: #5D8BF4;
@@ -202,12 +206,12 @@
         list-style:none;
         align-self: center;
         align-content: center;
-        padding: 10px 15px;
+        padding: 1em 1.5em;
         margin: 0;
     }
     .pageNavigation li {
-        padding: 5px;
-        margin: 2.5px;
+        padding: 0.5em;
+        margin: 0.25em;
         background-color: white;
     }
 
@@ -223,16 +227,16 @@
 
     /** https://onaircode.com/html-css-custom-scrollbar-examples/ */
     ::-webkit-scrollbar {
-        width: 15px;
-        height: 15px;
+        width: 1.5em;
+        height: 1.5em;
     }
     ::-webkit-scrollbar-track {
-        border-radius: 10px;
+        border-radius: 1em;
         background-color: #ffffff33;
     }
     ::-webkit-scrollbar-thumb {
         background-color: rgb(255, 255, 255);
-        border-radius: 10px;
+        border-radius: 1em;
         -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0 3px 13px 1px;
         box-shadow: rgba(0, 0, 0, 0.12) 0 3px 13px 1px;
     }

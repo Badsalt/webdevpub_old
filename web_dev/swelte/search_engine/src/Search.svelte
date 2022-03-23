@@ -4,6 +4,7 @@
     import { IsHomePage } from "./stores.js";
     import {maxItemsPerPage} from "./stores.js";
     let question;
+    let test = false;
     let settingsActive;
     $IsHomePage = true;
     async function search() {
@@ -29,16 +30,12 @@
         
     }
 </script>
-
 <div class="settingsContainer" class:invisible={!settingsActive} >
-    <span class="fa fa-times fa-2x" style="color: red; position: absolute; top: 10px; right: 10px;" on:click={() =>settingsActive = false}></span>
+    <span class="fa fa-times fa-2x" style="color: red; position: absolute; top: 1em; right: 1em;" on:click={() =>settingsActive = false}></span>
     <div style="color: white;">
         Set number of items per page
-        <input type="number" min="1" name="" id="" bind:value={$maxItemsPerPage}>
-        Set color
-        <input type="color">
-        Set Dark mode
-        <input type="checkbox" name="" id="">
+        <input type="number" min="1" bind:value={$maxItemsPerPage}>
+        Invert colors
     </div>
 </div>
 
@@ -52,8 +49,8 @@
             }}
         >
             <input placeholder="Search Here" bind:value={question} /> 
-            <span class="fa fa-search fa-lg searchIcon"></span>
-            <span on:click={() => settingsActive = true} class="fa fa-gear fa-2x settingsIcon"></span>
+            <span class="fa fa-search fa-2x searchIcon"></span>
+            <span on:click={() => settingsActive = true} class="fa fa-gear fa-3x settingsIcon"></span>
         </form>
     </div> 
     {:else}
@@ -68,14 +65,13 @@
                     }}
                 >
                     <input placeholder="Search Here" bind:value={question} />
-                    <span  class="fa fa-search fa-lg searchIcon"></span>
-                    <span on:click={() => settingsActive = true} class="fa fa-gear fa-2x settingsIcon"></span>
+                    <span class="fa fa-search fa-2x searchIcon"></span>
+                    <span on:click={() => settingsActive = true} class="fa fa-gear fa-3x settingsIcon"></span>
                 </form> 
             </div>
                 </div>
                 
     {/if}
-
 
 <style>
 
@@ -113,14 +109,14 @@
     .searchIcon {
         display:inline-block;
         position: absolute;
-        left: 15px;
-        top: 15px;
+        left: 0.9em;
+        top: 0.6em;
         color: rgb(10, 23, 95)
     }
 
     .settingsIcon {
-        right: 17px;
-        top: 8px;
+        right: 0.5em;
+        top: 0.2em;
     }
 
     .settingsIcon {
@@ -133,17 +129,47 @@
 
     .container {
         margin-top: 30vh;
-        width: 95%;
+        width: 70%;
         text-align: center;
-        background-color: rgba(255, 255, 255, 0.15);
-        border-radius: 50px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 30px;     
     }
+
+    @media screen and (min-width: 1400px ){
+        .container {
+            width: 1000px;
+        }
+
+    }
+
+    @media screen and (max-width: 768px){
+        .container {
+            width: 95%
+        }
+        .container form {
+            width: 80%;
+        }
+
+        .header-search form {
+            width: 80%;
+        }
+
+        .header-search .flexContainer {
+            margin-left: 5px !important;
+        }
+
+    }
+
+    .container form {
+        margin-bottom: 10px;
+        width: 80%;
+    }
+
     .header-search {
         width: 100vw;
         height: 150px;
         text-align: center;  
-        background-color: rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
+        background-color: rgba(255, 255, 255, 0.5);
         /*https://www.w3schools.com/css/css3_shadows_box.asp */
         box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2); 
     }
@@ -173,9 +199,10 @@
     }
     form input {
         width: 100%;
-        border-radius: 50px;
+        font-size: 15px;
+        border-radius: 30px;
         padding: 15px;
-        text-indent: 45px;
+        text-indent: 30px;
     }
 
     .settingsContainer {
@@ -189,10 +216,6 @@
         justify-content: center;
         align-items: center;
         text-align: center;
-    }
-
-    .settingsContainer input:focus {
-        
     }
 
     .settingsContainer.invisible {

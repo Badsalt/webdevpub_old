@@ -13,9 +13,10 @@
         <SpinnerNew />
     {:then result}
         <Results json={result} />
-        
+       
     {:catch error}
         <p style="color: red">{error.message}</p>
+        
     {/await}
 </main>
 
@@ -28,8 +29,7 @@
     main {
         height: 100vh;
         width: 100vw;
-        background: rgb(255,166,49);
-background: linear-gradient(0deg, rgba(255,166,49,1) 21%, rgba(255,166,49,1) 41%, rgba(75,147,201,1) 61%, rgba(75,147,201,1) 100%);
+        background: linear-gradient(to bottom, #2473ab 0%, #1e528e 70%, #5b7983 100%);
         display: flex;
         justify-content: start;
         align-items: center;
