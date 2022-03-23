@@ -14,6 +14,7 @@
         <SpinnerNew />
     {:then result}
         <Results json={result} />
+        
     {:catch error}
         <p style="color: red">{error.message}</p>
     {/await}

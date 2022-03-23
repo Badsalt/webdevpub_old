@@ -2,13 +2,15 @@
 <script>
     import { promise } from "./stores.js";
     import { IsHomePage } from "./stores.js";
+    import {maxItemsPerPage} from "./stores.js";
     let question;
+    let settingsActive;
     $IsHomePage = true;
     async function search() {
 
         try {
             const res = await fetch(
-            `https://demo.dataverse.org/api/search?q=` + question + "&per_page=50"
+            `https://demo.dataverse.org/api/search?q=` + question + "&per_page=1000"
         );
             const json = await res.json();
             // delay to show spinner. is this a good idea lol ?
@@ -19,7 +21,7 @@
                 throw new Error(json);
             }
         } catch {
-            return {error: "Search failed, please check your internet connection"}
+            return {error: "Search failed, please check your internet connection."}
         }
         
 
@@ -27,7 +29,19 @@
         
     }
 </script>
-    
+
+<div class="settingsContainer" class:invisible={!settingsActive} >
+    <span class="fa fa-times fa-2x" style="color: red; position: absolute; top: 10px; right: 10px;" on:click={() =>settingsActive = false}></span>
+    <div style="color: white;">
+        Set number of items per page
+        <input type="number" min="1" name="" id="" bind:value={$maxItemsPerPage}>
+        Set color
+        <input type="color">
+        Set Dark mode
+        <input type="checkbox" name="" id="">
+    </div>
+</div>
+
     {#if $IsHomePage}
     <div class="container">
     <h1>CLOUD SEARCH</h1>
@@ -39,7 +53,7 @@
         >
             <input placeholder="Search Here" bind:value={question} /> 
             <span class="fa fa-search fa-lg searchIcon"></span>
-            <span class="fa fa-gear fa-2x settingsIcon"></span>
+            <span on:click={() => settingsActive = true} class="fa fa-gear fa-2x settingsIcon"></span>
         </form>
     </div> 
     {:else}
@@ -55,13 +69,12 @@
                 >
                     <input placeholder="Search Here" bind:value={question} />
                     <span  class="fa fa-search fa-lg searchIcon"></span>
-                    <span class="fa fa-gear fa-2x settingsIcon"></span>
+                    <span on:click={() => settingsActive = true} class="fa fa-gear fa-2x settingsIcon"></span>
                 </form> 
             </div>
                 </div>
                 
     {/if}
-
 
 
 <style>
@@ -123,20 +136,16 @@
         width: 95%;
         text-align: center;
         background-color: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-
         border-radius: 50px;
     }
     .header-search {
         width: 100vw;
-        position: absolute;
-        z-index: 1000;
         height: 150px;
         text-align: center;  
         background-color: rgba(255, 255, 255, 0.3);
         backdrop-filter: blur(10px);
         /*https://www.w3schools.com/css/css3_shadows_box.asp */
-        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2); 
     }
 
     .container:hover{
@@ -168,4 +177,26 @@
         padding: 15px;
         text-indent: 45px;
     }
+
+    .settingsContainer {
+        width: 100vw;
+        height: 100vh; 
+        background-color:black;
+        opacity: 1; 
+        position: fixed;
+        z-index: 1000; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .settingsContainer input:focus {
+        
+    }
+
+    .settingsContainer.invisible {
+        display: none;
+    }
+
 </style>

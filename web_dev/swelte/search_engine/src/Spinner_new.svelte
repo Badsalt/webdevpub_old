@@ -24,10 +24,8 @@
 
 <main>
     <div class="container">
-        <span
-        >
-            <img height="200px" src="./pic/cloud-icon.png" alt="Cloud" /></span
-        >
+        <span>
+            <img height="200px" src="./pic/cloud-icon.png" alt="Cloud" /></span>
         {#if isActive}
             <div class="flexcontainer">
                 <span
