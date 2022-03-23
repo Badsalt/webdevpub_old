@@ -10,7 +10,7 @@
 
         try {
             const res = await fetch(
-            `https://demo.dataverse.org/api/search?q=` + question + "&per_page=1000"
+            `https://demo.dataverse.org/api/search?q=` + question + "&per_page=100"
         );
             const json = await res.json();
             // delay to show spinner. is this a good idea lol ?
