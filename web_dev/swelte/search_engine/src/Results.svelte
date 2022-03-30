@@ -10,11 +10,19 @@
     let currentPage = 1;
 
     ($maxItemsPerPage) ? $maxItemsPerPage : $maxItemsPerPage = 15;
-         
+    ($maxItemsPerPage < 5) ? $maxItemsPerPage = 5 : $maxItemsPerPage;
+
+    let item_per_page = $maxItemsPerPage
+
     function calculatePages(item_per_page){
+        
         if ( json && "data" in json && "items" in json.data && json.data.items.length > 0 ){
             let jsonLength = json.data.items.length;
-            (item_per_page > 0) ? "" : item_per_page = 1;
+
+            (item_per_page) ? item_per_page : item_per_page = 15;
+            (item_per_page < 5) ? item_per_page = 5 : item_per_page;
+
+            console.log(item_per_page)
             pages = Math.ceil(jsonLength/item_per_page);
         }
         return "" ;
@@ -54,15 +62,19 @@
         return output;
     }
 
+    function scrollToTop(i){
+        let element = document.getElementById("scroll")
+        element.scroll({top:0,behavior:'smooth'});
+    }
 
 </script>
-{#key $maxItemsPerPage }
+{#key $maxItemsPerPage}
 {calculatePages($maxItemsPerPage)}
 {#if json && "data" in json && "items" in json.data && json.data.items.length > 0 && !$IsHomePage}
-<div>Results Found: {json.data.items.length} Page: {currentPage}</div>
-<div class="column">
+<div style="color: white; font-size: 1.5em;">Results Found: {json.data.items.length} Page: {currentPage}</div>
+<div id="scroll" class="column">
     {#each json.data.items as item, index}
-    {#if (index < $maxItemsPerPage * currentPage) &&  (index >=  $maxItemsPerPage * (currentPage-1)) }
+    {#if (index < item_per_page * currentPage) &&  (index >=  item_per_page * (currentPage-1)) }
     <div in:fly="{{ y: 100, duration: 500 }}" class="searchResultsContainer">
 
         <div class="searchResults">
@@ -93,7 +105,7 @@
         <ul class="pageNavigation">
             {#if pages >= 1}
                 {#each Array(pages) as _, i}
-                    <li class:clicked={currentPage==i+1} on:click="{() => currentPage = i+1}">{i+1}</li>     
+                    <li class:clicked={currentPage==i+1} on:click="{()=>{scrollToTop(); currentPage= i+1 }}">{i+1}</li>     
                 {/each}
             {/if}               
         </ul>
@@ -107,9 +119,9 @@
     </div>
 {:else if !$IsHomePage}
         <div class="searchResultsContainer">
-            <p style="color: red; font-size: 3em" transition:fade>No Results Found. You may <a style="color: red;" target="_b" href="https://youtu.be/dQw4w9WgXcQ">like</a></p> 
+            <p style="color: red; font-size: 3em" transition:fade>No Results Found. You might like <a style="color: blue;" target="_blank" href="https://youtu.be/dQw4w9WgXcQ">this</a> instead</p> 
         </div>
-{/if}gi
+{/if}
 
 {/if}
 {/key}
@@ -169,6 +181,11 @@
         :global(body) {
             font-size: 55%;
         }
+
+        .searchResultsContainer {
+            width: 90%;
+        }
+
     }
     .column {
         display: flex;
@@ -176,6 +193,7 @@
         align-items: center;
         flex-direction: column;
         overflow-y: scroll;
+        overflow-x: hidden;
         box-sizing: border-box;
         padding-left: 1%;
         padding-right: 1%;

@@ -8,12 +8,11 @@
 
 <main>
     <Search />
-    
+
     {#await $promise}
         <SpinnerNew />
     {:then result}
         <Results json={result} />
-       
     {:catch error}
         <p style="color: red">{error.message}</p>
         

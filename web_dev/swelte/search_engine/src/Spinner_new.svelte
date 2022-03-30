@@ -1,9 +1,10 @@
 <script>
-    import { fly } from "svelte/transition";
+    import { fly, fade, slide, draw } from "svelte/transition";
     const amountOfQuestionMarks = 5;
+
     let isActive = true;
     let duration = 500;
-    let y = -100;
+    let y = -125;
 
     async function myLoop() {
         setTimeout(function () {
@@ -23,9 +24,8 @@
 </script>
 
 <main>
-    <div class="container">
-        <span>
-            <img height="200px" src="./pic/cloud-icon.png" alt="Cloud" /></span>
+    <div class="container" out:fade>
+        <img id="image" width="100%" src="./pic/cloud-black.svg" alt="Cloud" />
         {#if isActive}
             <div class="flexcontainer">
                 <span
@@ -51,6 +51,7 @@
                 >
             </div>
         {/if}
+        
     </div>
 </main>
 
@@ -63,9 +64,10 @@
         margin: 0 auto;
         margin-top: 20px;
         width: 50%;
+        max-width: 400px;
         text-align: center;
         position: relative;
-        height: 275px;
+        height: 2.75em;
     }
 
     .flexcontainer {

@@ -4,9 +4,9 @@
     import { IsHomePage } from "./stores.js";
     import {maxItemsPerPage} from "./stores.js";
     let question;
-    let test = false;
     let settingsActive;
     $IsHomePage = true;
+    $maxItemsPerPage = 15;
     async function search() {
 
         try {
@@ -31,11 +31,11 @@
     }
 </script>
 <div class="settingsContainer" class:invisible={!settingsActive} >
-    <span class="fa fa-times fa-2x" style="color: red; position: absolute; top: 1em; right: 1em;" on:click={() =>settingsActive = false}></span>
-    <div style="color: white;">
+    <span class="fa fa-times fa-4x" style="color: red; position: absolute; top: 1em; right: 1em;" on:click={() => settingsActive = false}></span>
+    <div style="color: white; font-size: 3em;">
         Set number of items per page
-        <input type="number" min="1" bind:value={$maxItemsPerPage}>
-        Invert colors
+        <hr>
+        <input type="number" min="5" max="40" bind:value={$maxItemsPerPage}>
     </div>
 </div>
 
@@ -48,7 +48,7 @@
                 $IsHomePage = false;
             }}
         >
-            <input placeholder="Search Here" bind:value={question} /> 
+            <input  bind:value={question} /> 
             <span class="fa fa-search fa-2x searchIcon"></span>
             <span on:click={() => settingsActive = true} class="fa fa-gear fa-3x settingsIcon"></span>
         </form>
@@ -58,13 +58,13 @@
         <div class="header-search">
             <h1>CLOUD SEARCH</h1>
                 <div class="flexContainer">
-                    <div class="icon" on:click={() => $IsHomePage = true}><img style="height: 100%;" src="./pic/cloud-icon.png" alt="Go to Home Page" title="Go to Home Page"></div>
+                    <div class="icon" on:click={() => $IsHomePage = true}><img style="height: 100%" src="./pic/cloud-black.svg" alt="Go to Home Page" title="Go to Home Page"></div>
                     <form
                     on:submit|preventDefault={() => {
                         $promise = search();
                     }}
                 >
-                    <input placeholder="Search Here" bind:value={question} />
+                    <input  bind:value={question} />
                     <span class="fa fa-search fa-2x searchIcon"></span>
                     <span on:click={() => settingsActive = true} class="fa fa-gear fa-3x settingsIcon"></span>
                 </form> 
@@ -109,14 +109,14 @@
     .searchIcon {
         display:inline-block;
         position: absolute;
-        left: 0.9em;
-        top: 0.6em;
+        left: 20px;
+        top: 12px;
         color: rgb(10, 23, 95)
     }
 
     .settingsIcon {
-        right: 0.5em;
-        top: 0.2em;
+        right: 12px;
+        top: 10px;
     }
 
     .settingsIcon {
@@ -135,31 +135,6 @@
         border-radius: 30px;     
     }
 
-    @media screen and (min-width: 1400px ){
-        .container {
-            width: 1000px;
-        }
-
-    }
-
-    @media screen and (max-width: 768px){
-        .container {
-            width: 95%
-        }
-        .container form {
-            width: 80%;
-        }
-
-        .header-search form {
-            width: 80%;
-        }
-
-        .header-search .flexContainer {
-            margin-left: 5px !important;
-        }
-
-    }
-
     .container form {
         margin-bottom: 10px;
         width: 80%;
@@ -167,7 +142,7 @@
 
     .header-search {
         width: 100vw;
-        height: 150px;
+        height: 120px;
         text-align: center;  
         background-color: rgba(255, 255, 255, 0.5);
         /*https://www.w3schools.com/css/css3_shadows_box.asp */
@@ -202,7 +177,7 @@
         font-size: 15px;
         border-radius: 30px;
         padding: 15px;
-        text-indent: 30px;
+        text-indent: 45px;
     }
 
     .settingsContainer {
@@ -220,6 +195,48 @@
 
     .settingsContainer.invisible {
         display: none;
+    }
+
+    @media screen and (min-width: 1400px ){
+        .container {
+            width: 1000px;
+        }
+
+    }
+
+    @media screen and (max-width: 768px){
+        .container {
+            width: 95%
+        }
+        .container form {
+            width: 80%;
+        }
+
+        .header-search form {
+            width: 80%;
+        }
+
+        .header-search .flexContainer {
+            margin-left: 5px;
+        }
+
+        .settingsIcon {
+            top: 12px;
+            right: 12px;
+        }
+
+        form input {
+            text-indent: 35px;
+        }
+
+        .searchIcon {
+            top: 12px;
+        }
+
+        .settingsContainer div {
+            font-size: 2em !important;
+        }
+
     }
 
 </style>
